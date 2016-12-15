@@ -16,12 +16,20 @@ class CourseEntity extends Entity
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getCourseByID($course_id){
+    public function getCourseByID($id){
         $sql = 'SELECT * FROM course WHERE id = :id';
         $query = $this->db->prepare($sql);
-        $parameters = array(':id'=> $course_id);
+        $parameters = array(':id'=> $id);
         $query->execute($parameters);
         return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function getCourseSection($id){
+        $sql = 'SELECT * FROM section WHERE course_id = :id';
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id'=> $id);
+        $query->execute($parameters);
+        return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
 }

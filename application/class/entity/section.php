@@ -16,13 +16,7 @@ class SectionEntity extends Entity
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getCourseSection($course_id){
-        $sql = 'SELECT * FROM section WHERE course_id = :id';
-        $query = $this->db->prepare($sql);
-        $parameters = array(':id'=> $course_id);
-        $query->execute($parameters);
-        return $query->fetchAll(PDO::FETCH_OBJ);
-    }
+
 
 }
 

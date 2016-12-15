@@ -3,23 +3,23 @@
 /**
  * Created by Nathan Healea.
  * Project: GOLDaMatchingPortal
- * File: course.php
+ * File: classroom.php
  * Date: 12/13/16
  * Time: 1:08 PM
  */
-class CourseEntity extends Entity
+class ClassroomEntity extends Entity
 {
-    public function getCourse(){
-        $sql = 'SELECT * FROM course';
+    public function getClassroom(){
+        $sql = 'SELECT * FROM classroom';
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getCourseByID($course_id){
-        $sql = 'SELECT * FROM course WHERE id = :id';
+    public function getClassroomByID($id){
+        $sql = 'SELECT * FROM classroom WHERE id = :id';
         $query = $this->db->prepare($sql);
-        $parameters = array(':id'=> $course_id);
+        $parameters = array(':id'=> $id);
         $query->execute($parameters);
         return $query->fetch(PDO::FETCH_OBJ);
     }
