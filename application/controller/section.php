@@ -14,7 +14,13 @@ class Section extends Controller
      */
     public function index()
     {
+        require APP . 'class/entity/section.php';
+        $sectionEntity = new SectionEntity();
+        $sectionList = $sectionEntity->getSectionNoID();
 
+        $keys = $this->_getObjectKeys($sectionList[0]);
+
+        require APP . 'view/dashboard/section/index.php';
     }
 
 }

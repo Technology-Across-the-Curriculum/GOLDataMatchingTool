@@ -16,6 +16,14 @@ class SectionEntity extends Entity
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getSectionNoID(){
+        $sql = 'SELECT sec.id, c.acronym, cl.name, sec.crn, sec.term_code, sec.alt_term_code, sec.code FROM section as sec INNER JOIN classroom as cl ON sec.classroom_id = cl.id
+INNER JOIN course as c ON sec.course_id = c.id';
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
 
 }
