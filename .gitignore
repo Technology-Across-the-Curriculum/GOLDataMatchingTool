@@ -50,4 +50,5 @@ fabric.properties
 .name
 .idea/
 public/libs/
+application/config/
 

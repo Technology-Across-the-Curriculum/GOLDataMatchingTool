@@ -9,6 +9,9 @@
  */
 class Course extends Controller
 {
+    /**
+     * View that list all courses in the study.
+     */
     public function index()
     {
         require APP . 'class/entity/course.php';
@@ -23,7 +26,11 @@ class Course extends Controller
         require APP . 'view/dashboard/course/index.php';
     }
 
-    public function select($course_id){
+    /**
+     * @param $course_id
+     * view for showing a course details
+     */
+    public function detail($course_id){
         require APP . 'class/entity/course.php';
         require APP . 'class/entity/section.php';
 
@@ -38,14 +45,22 @@ class Course extends Controller
             array_push($keys, $key);
         }
 
-        require APP . 'view/dashboard/course/select.php';
+        require APP . 'view/dashboard/course/details.php';
 
     }
 
+    /**
+     * @param $course_id
+     * view for editing a course
+     */
     public function edit($course_id){
 
     }
 
+    /**
+     * @param $course_id
+     * view for deleteing a course
+     */
     public function delete($course_id){
 
     }

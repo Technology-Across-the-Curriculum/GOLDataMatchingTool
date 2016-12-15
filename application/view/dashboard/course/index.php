@@ -20,11 +20,14 @@
 
     <title><?php echo APP_NAME; ?></title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="<?php echo URL; ?>libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- MetisMenu CSS -->
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
+
+    <!-- DataTables CSS -->
+    <link href="<?php echo URL; ?>libs/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
     <!-- Dashboard CSS -->
     <link href="<?php echo URL; ?>libs/dashboard/css/dashboard.css" rel="stylesheet" type="text/css">
@@ -62,38 +65,39 @@
 
             <!-- List Courses -->
             <div class="row">
-                <table class="table">
-                    <thead>
-                    <?php
-                    foreach ($keys as $key)
-                        echo '<th>' . $key . '</th>'
-                    ?>
-                    <th>Options</th>
-                    </thead>
-                    <tbody>
-
-                    <?php
-                    foreach ($courselist as $course) {
+                <div class="col-lg-12">
+                    <table id="course-table" class="table">
+                        <thead>
+                        <?php
+                        foreach ($keys as $key)
+                            echo '<th>' . $key . '</th>'
                         ?>
-                        <tr>
-                            <?php foreach ($course as $key => $value) {
-                                echo '<td>' . $value . '</td>';
-                            } ?>
-                            <td>
-                                <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
-                                   class="btn btn-default">Select</a>
-                                <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
-                                   class="btn btn-warning">Edit</a>
-                                <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
-                                   class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    <?php } ?>
+                        <th>Options</th>
+                        </thead>
+                        <tbody>
+
+                        <?php
+                        foreach ($courselist as $course) {
+                            ?>
+                            <tr>
+                                <?php foreach ($course as $key => $value) {
+                                    echo '<td>' . $value . '</td>';
+                                } ?>
+                                <td>
+                                    <a href="<?php echo URL; ?>course/detail/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
+                                       class="btn btn-default">Select</a>
+                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
+                                       class="btn btn-warning">Edit</a>
+                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
+                                       class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
 
 
-                    </tbody>
-                </table>
-
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
@@ -109,9 +113,15 @@
         <!-- Metis Menu Plugin JavaScript -->
         <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
 
+        <!-- DataTables Plugin JavaScript -->
+        <script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
+
         <!-- Custom Theme JavaScript -->
         <script>
             var url = '<?php echo URL; ?>';
+            $(document).ready(function () {
+                $('#course-table').DataTable();
+            });
         </script>
         <script src="<?php echo URL; ?>libs/dashboard/js/dashboard.js"></script>
         <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>

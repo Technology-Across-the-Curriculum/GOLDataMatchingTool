@@ -28,7 +28,8 @@
 <div class="main-content">
     <div class="content">
         <header class="col-lg-12">
-            <h1><?php echo APP_NAME; ?></h1>
+            <h1>404</h1>
+            <p>page not found</p>
         </header>
         <section class="col-lg-offset-3 col-lg-6">
             <p></p>

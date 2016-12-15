@@ -20,8 +20,8 @@
 
     <title><?php echo APP_NAME; ?></title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="<?php echo URL; ?>libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- MetisMenu CSS -->
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
