@@ -18,10 +18,7 @@ class Course extends Controller
         $courseEntity = new CourseEntity();
         $courselist = $courseEntity->getCourse();
 
-        $keys = [];
-        foreach($courselist[0] as $key => $value){
-            array_push($keys, $key);
-        }
+        $keys = $this->_getObjectKeys($courselist[0]);
 
         require APP . 'view/dashboard/course/index.php';
     }
@@ -31,19 +28,18 @@ class Course extends Controller
      * view for showing a course details
      */
     public function detail($course_id){
+
+        # Linking required entitys
         require APP . 'class/entity/course.php';
-        require APP . 'class/entity/section.php';
 
+        # Creating course entity object
         $courseEntity = new CourseEntity();
-        $sectionEntity = new SectionEntity();
 
+        # Getting current course information
         $courseInfo = $courseEntity->getCourseByID($course_id);
-        $sectionList = $sectionEntity->getCourseSection($course_id);
+        $sectionList = $courseEntity->getCourseSection($course_id);
 
-        $keys = [];
-        foreach($sectionList[0] as $key => $value){
-            array_push($keys, $key);
-        }
+        $keys = $this->_getObjectKeys($sectionList[0]);
 
         require APP . 'view/dashboard/course/details.php';
 

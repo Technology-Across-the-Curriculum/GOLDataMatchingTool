@@ -35,4 +35,12 @@ class Controller
         }
     }
 
+    function _getObjectKeys($object){
+        $keys = [];
+        foreach ($object as $key => $value) {
+            array_push($keys, $key);
+        }
+        return $keys;
+    }
+
 }
