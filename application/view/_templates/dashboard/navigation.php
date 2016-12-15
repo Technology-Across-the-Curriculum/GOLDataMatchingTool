@@ -34,6 +34,9 @@
                 <li>
                     <a href="<?php echo URL; ?>course/index">Courses</a>
                 </li>
+                <li>
+                    <a href="<?php echo URL; ?>section/index">Sections</a>
+                </li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
