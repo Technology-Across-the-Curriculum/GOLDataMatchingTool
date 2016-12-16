@@ -69,42 +69,116 @@
             </div>
             <div class="row">
                 <div class="col-lg-4"><p>Classroom: <?php echo $sectionInfo->name; ?></p></div>
-                </div>
+            </div>
 
-            <!-- List Courses -->
+
+            <!-- CLasslist -->
             <div class="row">
                 <div class="col-lg-12">
-                    <table id="session-table" class="table">
-                        <thead>
-                        <?php
-                        foreach ($keys as $key)
-                            echo '<th>' . $key . '</th>'
-                        ?>
-                        <th>Options</th>
-                        </thead>
-                        <tbody>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Classlist
+                            <div class="pull-right">
+                                <a data-toggle="collapse" data-target="#wordsalad-summary-wrapper">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                </a>
+                            </div>
 
-                        <?php
-                        foreach ($sessionList as $session) {
-                            ?>
-                            <tr>
-                                <?php foreach ($session as $key => $value) {
-                                    echo '<td>' . $value . '</td>';
-                                } ?>
-                                <td>
-                                    <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div id="classlist-wrapper" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="col-lg-12">
+                                    <table id="classlist-table" class="table">
+                                        <thead>
+                                        <?php
+                                        foreach ($studentKeys as $key)
+                                            echo '<th>' . $key . '</th>'
+                                        ?>
+                                        <th>Options</th>
+                                        </thead>
+                                        <tbody>
+
+                                        <?php
+                                        foreach ($studentList as $student) {
+                                            ?>
+                                            <tr>
+                                                <?php foreach ($student as $key => $value) {
+                                                    echo '<td>' . $value . '</td>';
+                                                } ?>
+                                                <td>
+                                                    <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                       class="btn btn-default">Select</a>
+                                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                       class="btn btn-warning">Edit</a>
+                                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                       class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
 
 
-                        </tbody>
-                    </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List sessions -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Session
+                            <div class="pull-right">
+                                <a data-toggle="collapse" data-target="#wordsalad-summary-wrapper">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div id="session-wrapper" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="col-lg-12">
+                                    <table id="session-table" class="table">
+                                        <thead>
+                                        <?php
+                                        foreach ($sessionKeys as $key)
+                                            echo '<th>' . $key . '</th>'
+                                        ?>
+                                        <th>Options</th>
+                                        </thead>
+                                        <tbody>
+
+                                        <?php
+                                        foreach ($sessionList as $session) {
+                                            ?>
+                                            <tr>
+                                                <?php foreach ($session as $key => $value) {
+                                                    echo '<td>' . $value . '</td>';
+                                                } ?>
+                                                <td>
+                                                    <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                       class="btn btn-default">Select</a>
+                                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                       class="btn btn-warning">Edit</a>
+                                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                       class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,6 +202,7 @@
         var url = '<?php echo URL; ?>';
         $(document).ready(function () {
             $('#session-table').DataTable();
+            $('#classlist-table').DataTable();
         });
     </script>
     <script src="<?php echo URL; ?>libs/dashboard/js/dashboard.js"></script>

@@ -45,6 +45,14 @@ INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getSectionClasslist($id){
+        $sql = 'SELECT * FROM classlist WHERE section_id = :id';
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id' => $id);
+        $query->execute($parameters);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
 }
 

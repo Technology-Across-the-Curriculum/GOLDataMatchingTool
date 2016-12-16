@@ -34,8 +34,10 @@ class Section extends Controller
         # Getting current course information
         $sectionInfo = $sectionEntity->getSectionDetailByID($id);
         $sessionList = $sectionEntity->getSectionSession($id);
+        $sessionKeys = $this->_getObjectKeys($sessionList[0]);
 
-        $keys = $this->_getObjectKeys($sessionList[0]);
+        $studentList = $sectionEntity->getSectionClasslist($id);
+        $studentKeys = $this->_getObjectKeys($studentList[0]);
 
         require APP . 'view/dashboard/section/details.php';
 
