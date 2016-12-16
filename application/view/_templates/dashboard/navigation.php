@@ -43,6 +43,9 @@
                 <li>
                     <a href="<?php echo URL; ?>section/index">Sections</a>
                 </li>
+                <li>
+                    <a href="<?php echo URL; ?>session/index">Sections</a>
+                </li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

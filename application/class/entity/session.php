@@ -9,17 +9,37 @@
  */
 class SessionEntity extends Entity
 {
-    public function getSession(){
+    public function getSession()
+    {
         $sql = 'SELECT * FROM session';
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getSessionByID($id){
+    public function getSessionNoID()
+    {
+        $sql = 'SELECT
+                  s.id,
+                  c.acronym,
+                  sec.crn,
+                  sec.code,
+                  s.guid,
+                  s.source_id,
+                  s.date_created
+                FROM session as s
+                  INNER JOIN section as sec ON s.section_id = sec.id
+                  INNER JOIN course as c On sec.course_id = c.id';
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getSessionByID($id)
+    {
         $sql = 'SELECT * FROM session WHERE id = :id';
         $query = $this->db->prepare($sql);
-        $parameters = array(':id'=> $id);
+        $parameters = array(':id' => $id);
         $query->execute($parameters);
         return $query->fetch(PDO::FETCH_OBJ);
     }
