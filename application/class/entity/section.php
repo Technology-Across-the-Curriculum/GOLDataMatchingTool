@@ -9,14 +9,16 @@
  */
 class SectionEntity extends Entity
 {
-    public function getSections(){
+    public function getSections()
+    {
         $sql = 'SELECT * FROM section';
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getSectionNoID(){
+    public function getSectionDetail()
+    {
         $sql = 'SELECT sec.id, c.acronym, cl.name, sec.crn, sec.term_code, sec.alt_term_code, sec.code FROM section as sec INNER JOIN classroom as cl ON sec.classroom_id = cl.id
 INNER JOIN course as c ON sec.course_id = c.id';
         $query = $this->db->prepare($sql);
@@ -24,6 +26,24 @@ INNER JOIN course as c ON sec.course_id = c.id';
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getSectionDetailByID($id)
+    {
+        $sql = 'SELECT sec.id, c.acronym, cl.name, sec.crn, sec.term_code, sec.alt_term_code, sec.code FROM section as sec INNER JOIN classroom as cl ON sec.classroom_id = cl.id
+INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id' => $id);
+        $query->execute($parameters);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function getSectionSession($id)
+    {
+        $sql = 'SELECT * FROM session WHERE section_id = :id';
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id' => $id);
+        $query->execute($parameters);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
 
 
 }

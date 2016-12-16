@@ -58,15 +58,23 @@
             <!-- Page Header -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Details: <?php echo $courseInfo->acronym; ?></h1>
+                    <h1>Details: <?php echo $sectionInfo->acronym; ?></h1>
                 </div>
-
             </div>
+            <div class="row">
+                <div class="col-lg-3"><p>CRN: <?php echo $sectionInfo->crn; ?></p></div>
+                <div class="col-lg-3"><p>Section: <?php echo $sectionInfo->code; ?></p></div>
+                <div class="col-lg-3"><p>Term: <?php echo $sectionInfo->term_code; ?></p></div>
+                <div class="col-lg-3"><p>ALT Term: <?php echo $sectionInfo->alt_term_code; ?></p></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4"><p>Classroom: <?php echo $sectionInfo->name; ?></p></div>
+                </div>
 
             <!-- List Courses -->
             <div class="row">
                 <div class="col-lg-12">
-                    <table id="section-table" class="table">
+                    <table id="session-table" class="table">
                         <thead>
                         <?php
                         foreach ($keys as $key)
@@ -77,18 +85,18 @@
                         <tbody>
 
                         <?php
-                        foreach ($sectionList as $section) {
+                        foreach ($sessionList as $session) {
                             ?>
                             <tr>
-                                <?php foreach ($section as $key => $value) {
+                                <?php foreach ($session as $key => $value) {
                                     echo '<td>' . $value . '</td>';
                                 } ?>
                                 <td>
-                                    <a href="<?php echo URL; ?>section/select/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
+                                    <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
+                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
+                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
@@ -119,7 +127,7 @@
     <script>
         var url = '<?php echo URL; ?>';
         $(document).ready(function () {
-            $('#section-table').DataTable();
+            $('#session-table').DataTable();
         });
     </script>
     <script src="<?php echo URL; ?>libs/dashboard/js/dashboard.js"></script>

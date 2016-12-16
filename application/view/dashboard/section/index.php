@@ -84,7 +84,7 @@
                                     echo '<td>' . $value . '</td>';
                                 } ?>
                                 <td>
-                                    <a href="<?php echo URL; ?>section/detail/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
+                                    <a href="<?php echo URL; ?>section/select/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-default">Select</a>
                                     <a href="<?php echo URL; ?>section/edit/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-warning">Edit</a>
