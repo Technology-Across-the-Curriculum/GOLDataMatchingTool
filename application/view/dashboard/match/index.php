@@ -63,8 +63,7 @@
             <div class="row">
                 <!-- course selection !-->
                 <div class="col-lg-6">
-                    <h4>Select Course</h4>
-                    <label for="courses">Select Course:</label>
+                    <label for="courses"><h4>Select Course:</h4></label>
                     <select class="form-control" id="courses">
                         <option value='0' selected="selected">None</option>
                     </select>
@@ -72,7 +71,10 @@
 
                 <!-- section selection !-->
                 <div class="col-lg-6">
-                    <h3>Select section</h3>
+                    <label for="courses"><h4>Select Section:</h4></label>
+                    <select class="form-control" id="sections">
+                        <option value='0' selected="selected">None</option>
+                    </select>
                 </div>
 
             </div>

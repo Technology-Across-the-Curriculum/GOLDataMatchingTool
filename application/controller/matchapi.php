@@ -16,4 +16,11 @@ class Matchapi extends Controller
         echo json_encode($courses);
     }
 
+    public function getSection($id){
+        require APP . 'class/entity/course.php';
+        $courseEntity = new CourseEntity();
+        $sections = $courseEntity->getCourseSection($id);
+        echo json_encode($sections);
+    }
+
 }
