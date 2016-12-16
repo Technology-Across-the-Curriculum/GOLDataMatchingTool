@@ -38,6 +38,9 @@
                     <a href="<?php echo URL; ?>classroom/index">Classroom</a>
                 </li>
                 <li>
+                    <a href="<?php echo URL; ?>match/index">Match Records</a>
+                </li>
+                <li>
                     <a href="<?php echo URL; ?>section/index">Sections</a>
                 </li>
             </ul>

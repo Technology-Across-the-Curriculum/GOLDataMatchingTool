@@ -26,9 +26,6 @@
     <!-- MetisMenu CSS -->
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
-    <!-- DataTables CSS -->
-    <link href="<?php echo URL; ?>libs/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-
     <!-- Dashboard CSS -->
     <link href="<?php echo URL; ?>libs/dashboard/css/dashboard.css" rel="stylesheet" type="text/css">
 
@@ -58,48 +55,31 @@
             <!-- Page Header -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Details: <?php echo $courseInfo->acronym; ?></h1>
+                    <h1 class="page-header">Matching Tool</h1>
                 </div>
-
             </div>
 
-            <!-- List Courses -->
+            <!-- Course and Section selection !-->
             <div class="row">
-                <div class="col-lg-12">
-                    <table id="section-table" class="table">
-                        <thead>
-                        <?php
-                        foreach ($keys as $key)
-                            echo '<th>' . $key . '</th>'
-                        ?>
-                        <th>Options</th>
-                        </thead>
-                        <tbody>
-
-                        <?php
-                        foreach ($sectionList as $section) {
-                            ?>
-                            <tr>
-                                <?php foreach ($section as $key => $value) {
-                                    echo '<td>' . $value . '</td>';
-                                } ?>
-                                <td>
-                                    <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-
-
-                        </tbody>
-                    </table>
+                <!-- course selection !-->
+                <div class="col-lg-6">
+                    <h4>Select Course</h4>
+                    <label for="courses">Select Course:</label>
+                    <select class="form-control" id="courses">
+                        <option value='0' selected="selected">None</option>
+                    </select>
                 </div>
+
+                <!-- section selection !-->
+                <div class="col-lg-6">
+                    <h3>Select section</h3>
+                </div>
+
             </div>
+
+
         </div>
+
     </div>
     <!-- /#wrapper -->
 
@@ -112,18 +92,12 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- DataTables Plugin JavaScript -->
-    <script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script>
         var url = '<?php echo URL; ?>';
-        $(document).ready(function () {
-            $('#section-table').DataTable();
-        });
     </script>
-    <script src="<?php echo URL; ?>libs/dashboard/js/dashboard.js"></script>
-    <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
+
+    <script src="<?php echo URL; ?>js/matching.js"></script>
 
 </body>
 
