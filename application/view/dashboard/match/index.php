@@ -63,29 +63,33 @@
             <div class="row">
                 <!-- course selection !-->
                 <div class="col-lg-6">
-                    <label for="courses"><h4>Select Course:</h4></label>
-                    <select class="form-control" id="courses">
-                        <option value='0' selected="selected">None</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="courses"><h4>Select Course:</h4></label>
+                        <select class="form-control" id="courses">
+                            <option value='0' selected="selected">None</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- section selection !-->
                 <div class="col-lg-6">
-                    <label for="courses"><h4>Select Section:</h4></label>
-                    <select class="form-control" id="sections">
-                        <option value='0' selected="selected">None</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="courses"><h4>Select Section:</h4></label>
+                        <select class="form-control" id="sections">
+                            <option value='0' selected="selected">None</option>
+                        </select>
 
+                    </div>
+                </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Classlist
+                            <i class="fa fa-list fa-fw"></i> Classlist
                             <div class="pull-right">
-                                <a data-toggle="collapse" data-target="#wordsalad-summary-wrapper">
+                                <a data-toggle="collapse" data-target="#classlist-wrapper">
                                     <i class="fa fa-minus fa-fw"></i>
                                 </a>
                             </div>
@@ -94,11 +98,9 @@
                         <!-- /.panel-heading -->
                         <div id="classlist-wrapper" class="panel-collapse collapse in">
                             <div class="panel-body">
-                                <div class="col-lg-12" id="student-list">
-                                    <table id="student-list" class="table">
+                                <table id="student-list" class="table table-condensed">
 
-                                    </table>
-                                </div>
+                                </table>
                             </div>
                         </div>
                     </div>

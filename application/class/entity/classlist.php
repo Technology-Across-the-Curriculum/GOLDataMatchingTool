@@ -9,17 +9,21 @@
  */
 class ClasslistEntity extends Entity
 {
-    public function getClasslist(){
+    public function getClasslist()
+    {
         $sql = 'SELECT * FROM classlist';
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getClastlistByID($id){
+
+
+    public function getClastlistByID($id)
+    {
         $sql = 'SELECT * FROM classlist WHERE id = :id';
         $query = $this->db->prepare($sql);
-        $parameters = array(':id'=> $id);
+        $parameters = array(':id' => $id);
         $query->execute($parameters);
         return $query->fetch(PDO::FETCH_OBJ);
     }

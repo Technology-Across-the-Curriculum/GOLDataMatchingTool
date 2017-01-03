@@ -15,6 +15,8 @@ $(document).ready(function () {
         getSection($(this).val());
     });
 
+    // When a user selects a section of a course
+    // get the class list
     $("#sections").change(function () {
         getClasslist($(this).val());
     });
@@ -31,9 +33,9 @@ function getCourses() {
     // Makes an ajax call to backfillapi/fillNode
     // returns stats of filled node
     $.ajax({
-        type: "get",
+        type : "get",
         async: false,
-        url: url + 'matchapi/getCourse'
+        url  : url + 'matchapi/getCourse'
     })
         .done(function (json) {
             data = JSON.parse(json);
@@ -59,9 +61,9 @@ function getSection(id) {
     // Makes an ajax call to backfillapi/fillNode
     // returns stats of filled node
     $.ajax({
-        type: "get",
+        type : "get",
         async: false,
-        url: url + 'matchapi/getSection/' + id
+        url  : url + 'matchapi/getSection/' + id
     })
         .done(function (json) {
             console.log(json);
@@ -69,13 +71,13 @@ function getSection(id) {
 
             // applying courses to dropdown
             var courseDropdown = $('#sections');
-            var listChildren = courseDropdown.children();
-            var numChildren = courseDropdown.children().length;
+            var listChildren   = courseDropdown.children();
+            var numChildren    = courseDropdown.children().length;
 
             // remove section when a new crouse is selected.
-            if(numChildren > 1){
+            if (numChildren > 1) {
 
-                for(var i = 1; i < numChildren; i++){
+                for (var i = 1; i < numChildren; i++) {
                     listChildren[i].remove();
                 }
             }
@@ -86,7 +88,7 @@ function getSection(id) {
 
         })
         .fail(function () {
-            console.log('matchapi/getSection' +  id + ' : failed')
+            console.log('matchapi/getSection' + id + ' : failed')
         });
 }
 
@@ -99,31 +101,65 @@ function getClasslist(id) {
     // Makes an ajax call to backfillapi/fillNode
     // returns stats of filled node
     $.ajax({
-        type: "get",
+        type : "get",
         async: false,
-        url: url + 'matchapi/getStudent/' + id
+        url  : url + 'matchapi/getClasslist/' + id
     })
         .done(function (json) {
             console.log(json);
+
             data = JSON.parse(json);
 
             // applying courses to dropdown
-            var keys = data['keys'];
-            var studentList = data['list'];
-            var table = $('student-list');
-            var tableHead = $("<thead>");
-            var tableHeadRow = $('tr');
+            var keys         = data['keys'];
+            var studentList  = data['list'];
+            var table        = $('#student-list');
+            var tableHead    = $('<thead/>');
+            var tableHeadRow = $('<tr/>');
+            var tableBody    = $('<tbody/>');
 
-            for( var i = 0; i < keys.length; i++){
-                tableHeadRow.append($("<th>",{text:keys[i]}));
+            if(table.children().length > 0 ){
+                console.log("Table has data: emptying table.");
+                table.empty();
+            }
+            else{
+                console.log("Table does not have data.");
             }
 
-            console.log(tableHeadRow.children());
+
+            // adding header to the table
+            for (var i = 0; i < keys.length; i++) {
+                tableHeadRow.append($('<th/>', {text: keys[i]}));
+            }
+            // adding options colum to table header
+            tableHeadRow.append($('<th/>', {text: "Options"}));
+
+            // adding information to the table
+            for (var s = 0; s < studentList.length; s++) {
+                var tableBodyRow = $('<tr>');
+                for (var k in studentList[s]) {
+                    tableBodyRow.append(
+                        $('<td>', {text: studentList[s][k]})
+                    );
+                }
+
+                // adding secetion button to row
+                tableBodyRow.append(
+                    $('<td>').append(
+                        $('<div>',{text: "Select", id: studentList[s].id, class:"btn btn-warning"})
+                    )
+                );
+
+                tableBody.append(tableBodyRow)
+            }
+
             tableHead.append(tableHeadRow);
+
             table.append(tableHead);
+            table.append(tableBody);
 
         })
         .fail(function () {
-            console.log('matchapi/getSection' +  id + ' : failed')
+            console.log('matchapi/getSection' + id + ' : failed')
         });
 }

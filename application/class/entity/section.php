@@ -53,6 +53,23 @@ INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getCensoredClassList($id)
+    {
+        $sql = "SELECT 
+                  id, 
+                  student_id as 'SID',
+                  first_name as 'Frist', 
+                  middle_name as 'Middle', 
+                  last_name as 'Last',
+                  email                  
+                FROM classlist 
+                WHERE section_id = :id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id' => $id);
+        $query->execute($parameters);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
 
 }
 
