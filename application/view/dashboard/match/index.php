@@ -26,11 +26,16 @@
     <!-- MetisMenu CSS -->
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
+    <!-- DataTables CSS -->
+    <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
+          type="text/css">
+
     <!-- Dashboard CSS -->
     <link href="<?php echo URL; ?>libs/dashboard/css/dashboard.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo URL; ?>css/matching-stylesheet.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,7 +67,7 @@
             <!-- Course and Section selection !-->
             <div class="row">
                 <!-- course selection !-->
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label for="courses"><h4>Select Course:</h4></label>
                         <select class="form-control" id="courses">
@@ -72,10 +77,21 @@
                 </div>
 
                 <!-- section selection !-->
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="courses"><h4>Select Section:</h4></label>
+                        <label for="sections"><h4>Select Section:</h4></label>
                         <select class="form-control" id="sections">
+                            <option value='0' selected="selected">None</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <!-- session selection !-->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="session"><h4>Select Session:</h4></label>
+                        <select class="form-control" id="session">
                             <option value='0' selected="selected">None</option>
                         </select>
 
@@ -83,6 +99,7 @@
                 </div>
             </div>
 
+            <!-- Class list Panel !-->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -97,12 +114,12 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div id="classlist-wrapper" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <table id="student-list" class="table table-condensed">
+                            <div class="panel-body classlist-info" id="classlist-table-wrapper">
 
-                                </table>
                             </div>
+                            <!-- /.panel-body !-->
                         </div>
+                        <!-- /.panel-collapse !-->
                     </div>
                 </div>
             </div>
@@ -120,6 +137,10 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- DataTables Plugin JavaScript -->
+    <script src="<?php echo URL;  ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo URL;  ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script>

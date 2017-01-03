@@ -66,7 +66,6 @@ function getSection(id) {
         url  : url + 'matchapi/getSection/' + id
     })
         .done(function (json) {
-            console.log(json);
             data = JSON.parse(json);
 
             // applying courses to dropdown
@@ -106,26 +105,23 @@ function getClasslist(id) {
         url  : url + 'matchapi/getClasslist/' + id
     })
         .done(function (json) {
-            console.log(json);
 
             data = JSON.parse(json);
 
             // applying courses to dropdown
             var keys         = data['keys'];
             var studentList  = data['list'];
-            var table        = $('#student-list');
+            var wrapper      = $('#classlist-table-wrapper');
+            var table        = $('<table>', {id: "classlist-table", class: "table"});
             var tableHead    = $('<thead/>');
             var tableHeadRow = $('<tr/>');
             var tableBody    = $('<tbody/>');
 
-            if(table.children().length > 0 ){
-                console.log("Table has data: emptying table.");
-                table.empty();
-            }
-            else{
-                console.log("Table does not have data.");
-            }
 
+            // removing table from page
+            if (wrapper.children().length > 0) {
+                wrapper.empty();
+            }
 
             // adding header to the table
             for (var i = 0; i < keys.length; i++) {
@@ -146,7 +142,7 @@ function getClasslist(id) {
                 // adding secetion button to row
                 tableBodyRow.append(
                     $('<td>').append(
-                        $('<div>',{text: "Select", id: studentList[s].id, class:"btn btn-warning"})
+                        $('<div>', {text: "Select", id: studentList[s].id, class: "btn btn-warning"})
                     )
                 );
 
@@ -154,9 +150,16 @@ function getClasslist(id) {
             }
 
             tableHead.append(tableHeadRow);
-
             table.append(tableHead);
             table.append(tableBody);
+            wrapper.append(table);
+
+            // Setting DataTables Options
+            table.dataTable({
+                scrollY: 200
+            });
+
+
 
         })
         .fail(function () {
