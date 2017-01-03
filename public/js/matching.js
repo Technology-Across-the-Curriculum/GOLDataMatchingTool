@@ -15,6 +15,10 @@ $(document).ready(function () {
         getSection($(this).val());
     });
 
+    $("#sections").change(function () {
+        getClasslist($(this).val());
+    });
+
 });
 
 
@@ -79,6 +83,44 @@ function getSection(id) {
             for (var i = 0; i < data.length; i++) {
                 courseDropdown.append('<option value="' + data[i].id + '">' + data[i].crn + ' ' + data[i].code + '</option>');
             }
+
+        })
+        .fail(function () {
+            console.log('matchapi/getSection' +  id + ' : failed')
+        });
+}
+
+/**
+ *
+ */
+function getClasslist(id) {
+    var data = null; // hold data to be returned
+
+    // Makes an ajax call to backfillapi/fillNode
+    // returns stats of filled node
+    $.ajax({
+        type: "get",
+        async: false,
+        url: url + 'matchapi/getStudent/' + id
+    })
+        .done(function (json) {
+            console.log(json);
+            data = JSON.parse(json);
+
+            // applying courses to dropdown
+            var keys = data['keys'];
+            var studentList = data['list'];
+            var table = $('student-list');
+            var tableHead = $("<thead>");
+            var tableHeadRow = $('tr');
+
+            for( var i = 0; i < keys.length; i++){
+                tableHeadRow.append($("<th>",{text:keys[i]}));
+            }
+
+            console.log(tableHeadRow.children());
+            tableHead.append(tableHeadRow);
+            table.append(tableHead);
 
         })
         .fail(function () {

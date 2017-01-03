@@ -22,5 +22,15 @@ class Matchapi extends Controller
         $sections = $courseEntity->getCourseSection($id);
         echo json_encode($sections);
     }
+    public function getStudent($id){
+        require APP . 'class/entity/section.php';
+        $sectionEntity = new SectionEntity();
+        $studentList = $sectionEntity->getSectionClasslist($id);
+        $studentKeys = $this->_getObjectKeys($studentList[0]);
+        $data = array('keys' =>$studentKeys, 'list' => $studentList);
+
+        echo json_encode($data);
+    }
+
 
 }

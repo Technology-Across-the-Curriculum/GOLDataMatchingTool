@@ -79,6 +79,31 @@
 
             </div>
 
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Classlist
+                            <div class="pull-right">
+                                <a data-toggle="collapse" data-target="#wordsalad-summary-wrapper">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div id="classlist-wrapper" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="col-lg-12" id="student-list">
+                                    <table id="student-list" class="table">
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
