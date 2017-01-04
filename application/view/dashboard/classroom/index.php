@@ -30,8 +30,8 @@
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
     <!-- DataTables CSS -->
-    <link href="<?php echo URL; ?>libs/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-
+    <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
+          type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -119,6 +119,7 @@
 
         <!-- DataTables Plugin JavaScript -->
         <script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script src="<?php echo URL; ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
 
         <!-- Custom Theme JavaScript -->
         <script>

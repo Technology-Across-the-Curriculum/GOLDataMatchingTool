@@ -1,0 +1,15 @@
+tr.success {
+    background-color: #dff0d8 !important;
+}
+
+tr.error {
+    background-color: #f2dede !important;
+}
+
+tr.warning {
+    background-color: #fcf8e3 !important;
+}
+
+tr.info {
+    background-color: #d9edf7 !important;
+}

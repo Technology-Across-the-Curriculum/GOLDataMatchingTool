@@ -99,7 +99,7 @@
                 </div>
             </div>
 
-            <!-- Class list Panel !-->
+            <!-- Classlist Panel !-->
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -115,6 +115,31 @@
                         <!-- /.panel-heading -->
                         <div id="classlist-wrapper" class="panel-collapse collapse in">
                             <div class="panel-body classlist-info" id="classlist-table-wrapper">
+
+                            </div>
+                            <!-- /.panel-body !-->
+                        </div>
+                        <!-- /.panel-collapse !-->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Participant Panel !-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-list fa-fw"></i> Participant
+                            <div class="pull-right">
+                                <a data-toggle="collapse" data-target="#participant-wrapper">
+                                    <i class="fa fa-minus fa-fw"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div id="participant-wrapper" class="panel-collapse collapse in">
+                            <div class="panel-body participant-info" id="participant-table-wrapper">
 
                             </div>
                             <!-- /.panel-body !-->
