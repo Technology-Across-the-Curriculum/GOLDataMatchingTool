@@ -60,6 +60,17 @@
 
             </div>
 
+            <div class="container">
+                <h2>Simple Collapsible</h2>
+                <p>Click on the button to toggle between showing and hiding content.</p>
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
+                <div id="demo" class="collapse">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </div>
+            </div>
+
 
 
         </div>
@@ -71,7 +82,7 @@
     <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo URL; ?>libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>

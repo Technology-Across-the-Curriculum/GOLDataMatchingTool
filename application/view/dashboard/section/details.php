@@ -23,14 +23,15 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
 
+    <!-- Bootstrap Admin CSS -->
+    <link href="<?php echo URL; ?>libs/bootstrap-admin/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+
     <!-- MetisMenu CSS -->
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
     <!-- DataTables CSS -->
     <link href="<?php echo URL; ?>libs/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Dashboard CSS -->
-    <link href="<?php echo URL; ?>libs/dashboard/css/dashboard.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -189,7 +190,10 @@
     <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo URL; ?>libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap admin JavaScript !-->
+    <script src="<?php echo URL; ?>libs/bootstrap-admin/js/sb-admin-2.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
@@ -205,7 +209,6 @@
             $('#classlist-table').DataTable();
         });
     </script>
-    <script src="<?php echo URL; ?>libs/dashboard/js/dashboard.js"></script>
     <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
 
 </body>

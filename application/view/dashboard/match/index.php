@@ -23,15 +23,15 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
 
+    <!-- Dashboard Admin CSS -->
+    <link href="<?php echo URL; ?>libs/bootstrap-admin/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+
     <!-- MetisMenu CSS -->
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
     <!-- DataTables CSS -->
     <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
           type="text/css">
-
-    <!-- Dashboard CSS -->
-    <link href="<?php echo URL; ?>libs/dashboard/css/dashboard.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -104,7 +104,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-list fa-fw"></i> Classlist
+                            <i class="fa fa-list fa-fw"></i> Class List
                             <div class="pull-right">
                                 <a data-toggle="collapse" data-target="#classlist-wrapper">
                                     <i class="fa fa-minus fa-fw"></i>
@@ -133,21 +133,26 @@
     <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo URL; ?>libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Dashboard JavaScript -->
+    <script src="<?php echo URL; ?>libs/bootstrap-admin/js/sb-admin-2.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- DataTables Plugin JavaScript -->
-    <script src="<?php echo URL;  ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo URL;  ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
+    <script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo URL; ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script>
         var url = '<?php echo URL; ?>';
     </script>
 
+    <script src="<?php echo URL; ?>js/buttons.js"></script>
     <script src="<?php echo URL; ?>js/matching.js"></script>
+
 
 </body>
 
