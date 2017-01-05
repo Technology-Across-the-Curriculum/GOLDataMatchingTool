@@ -44,9 +44,10 @@ class SessionEntity extends Entity
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    public function getParticipantNoMatch($section_id, $session_id)
+    public function getParticipantNoMatch($section_id)
     {
         $sql = 'SELECT
+  pl.id,
   pl.first_name AS "First",
   pl.last_name  AS "Last",
   pl.lmsid,
@@ -55,10 +56,9 @@ FROM participant_list pl
 where pl.classlist_id = (
   SELECT cl.id from classlist cl
   WHERE cl.first_name = "Darth" and cl.last_name = "Vader" and cl.section_id = :section_id
-)
-and session_id = :session_id';
+)';
         $query = $this->db->prepare($sql);
-        $parameters = array(':section_id' => $section_id, ':session_id'=> $session_id);
+        $parameters = array(':section_id' => $section_id);
         $query->execute($parameters);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }

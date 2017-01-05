@@ -139,9 +139,11 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div id="participant-wrapper" class="panel-collapse collapse in">
+                            <!--<div class="btn btn-info" id="select-all"> Select All</div>-->
                             <div class="panel-body participant-info" id="participant-table-wrapper">
 
                             </div>
+
                             <!-- /.panel-body !-->
                         </div>
                         <!-- /.panel-collapse !-->

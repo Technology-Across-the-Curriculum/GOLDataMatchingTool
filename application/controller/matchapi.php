@@ -39,12 +39,12 @@ class Matchapi extends Controller
         echo json_encode($data);
     }
 
-    public function getParticipant($section_id, $session_id){
+    public function getParticipant($section_id){
         require APP . 'class/entity/session.php';
         $participantKey = null;
 
         $sessionEntity = new SessionEntity();
-        $participantList = $sessionEntity->getParticipantNoMatch($section_id, $session_id);
+        $participantList = $sessionEntity->getParticipantNoMatch($section_id);
         if(!empty($participantList)) {
             $participantKey = $this->_getObjectKeys($participantList[0]);
         }

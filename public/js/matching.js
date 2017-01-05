@@ -10,6 +10,7 @@ var selectedStudentId = null;
 var courseId = null;
 var sectionId = null;
 var sessionId = null;
+var participantMatch = {};
 
 $(document).ready(function () {
     // Get course for dropdown
@@ -28,10 +29,17 @@ $(document).ready(function () {
         sectionId = $(this).val();
         getClasslist(sectionId);
         getSession(sectionId);
+        getParticipant(sectionId);
 
         // When a student is selected higlight the row and save the id
         $("div.btn").click(function () {
-            selectStudent($(this).attr('id'));
+            pid = $(this).attr('id').split('-');
+            if(pid[1] == 'participant') {
+                selectParticipant(pid[0]);
+            }
+            if(pid[1] == 'student') {
+                selectStudent(pid[0]);
+            }
         });
     });
 
@@ -39,13 +47,18 @@ $(document).ready(function () {
     // get the class list
     $("#session").change(function () {
         sessionId = $(this).val();
-        getParticipant(sectionId, sessionId);
 
-        // When a student is selected higlight the row and save the id
-        $("div.btn").click(function () {
-            selectStudent($(this).attr('id'));
-        });
     });
+
+    /*$("#select-all").click(function(){
+        var table = $("table#participant-table > tbody");
+        console.log(table);
+        for(var row in table.children()[0]){
+            console.log(row.id());
+            participantMatch[row.split('-')[0]] = 1;
+        }
+
+    })*/
 
 
 });
@@ -84,7 +97,6 @@ function getCourses() {
             console.log('matchapi/getCourse : failed')
         });
 }
-
 
 /**
  * Description:
@@ -177,7 +189,6 @@ function getSession(id) {
         });
 }
 
-
 /**
  * Description:
  *  Makes an Ajax call to matchapi function getClasslist and returns the classlist for a givien section and
@@ -225,7 +236,7 @@ function getClasslist(id) {
 
             // adding information to the table
             for (var s = 0; s < studentList.length; s++) {
-                var tableBodyRow = $('<tr>', {id: studentList[s].id});
+                var tableBodyRow = $('<tr>', {id: studentList[s].id + "-cl-row"});
                 for (var k in studentList[s]) {
                     tableBodyRow.append(
                         $('<td>', {text: studentList[s][k]})
@@ -235,7 +246,7 @@ function getClasslist(id) {
                 // adding secetion button to row
                 tableBodyRow.append(
                     $('<td>').append(
-                        $('<div>', {text: "Select", id: studentList[s].id + "-btn", class: "btn btn-warning"})
+                        $('<div>', {text: "Select", id: studentList[s].id + "-student", class: "btn btn-warning"})
                     )
                 );
 
@@ -289,7 +300,7 @@ function getParticipant(section_id, session_id) {
 
             // applying courses to dropdown
             var keys = data['keys'];
-            var studentList = data['list'];
+            var participantList = data['list'];
             var wrapper = $('#participant-table-wrapper');
             var table = $('<table>', {id: "participant-table", class: "table"});
             var tableHead = $('<thead/>');
@@ -302,7 +313,7 @@ function getParticipant(section_id, session_id) {
                 wrapper.empty();
             }
 
-            if (studentList != "empty" && keys != "empty") {
+            if (participantList != "empty" && keys != "empty") {
                 // adding header to the table
                 for (var i = 0; i < keys.length; i++) {
                     tableHeadRow.append($('<th/>', {text: keys[i]}));
@@ -311,18 +322,18 @@ function getParticipant(section_id, session_id) {
                 tableHeadRow.append($('<th/>', {text: "Options"}));
 
                 // adding information to the table
-                for (var s = 0; s < studentList.length; s++) {
-                    var tableBodyRow = $('<tr>', {id: studentList[s].id});
-                    for (var k in studentList[s]) {
+                for (var s = 0; s < participantList.length; s++) {
+                    var tableBodyRow = $('<tr>', {id: participantList[s].id + '-pl-row'});
+                    for (var k in participantList[s]) {
                         tableBodyRow.append(
-                            $('<td>', {text: studentList[s][k]})
+                            $('<td>', {text: participantList[s][k]})
                         );
                     }
 
                     // adding secetion button to row
                     tableBodyRow.append(
                         $('<td>').append(
-                            $('<div>', {text: "Select", id: studentList[s].id + "-btn", class: "btn btn-warning"})
+                            $('<div>', {text: "Select", id: participantList[s].id + "-participant", class: "btn btn-warning"})
                         )
                     );
 
@@ -340,6 +351,11 @@ function getParticipant(section_id, session_id) {
                     bPaginate: false,
                     stripeClasses: []
                 });
+
+                for(var p in participantList){
+                    participantMatch[p.id] = 0;
+                }
+
             }
             else {
                 wrapper.append(
@@ -360,18 +376,39 @@ function getParticipant(section_id, session_id) {
  * Returns:
  */
 function selectStudent(id) {
-    id = id.split('-')[0];
     console.log(id);
 
     if (selectedStudentId == null) {
-        $("#" + id).addClass('success');
+        $("#" + id + "-cl-row").addClass('success');
         selectedStudentId = id;
     }
     else {
-        $("#" + selectedStudentId).removeClass('success');
-        $("#" + id).addClass('success');
+        $("#" + selectedStudentId + "-cl-row").removeClass('success');
+        $("#" + id + "-cl-row").addClass('success');
         selectedStudentId = id;
     }
+
+
+}
+
+/**
+ * Description:
+ * Parameters:
+ * Returns:
+ */
+function selectParticipant(id) {
+    console.log(id);
+    if (participantMatch[id]) {
+        $("#" + id + "-pl-row").removeClass('success');
+        participantMatch[id] = 0;
+        console.log(participantMatch);
+    }
+    else{
+        $("#" + id + "-pl-row").addClass('success');
+        participantMatch[id] = 1;
+        console.log(participantMatch)
+    }
+
 
 
 }
