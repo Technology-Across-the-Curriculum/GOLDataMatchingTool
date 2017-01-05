@@ -11,6 +11,7 @@ var courseId = null;
 var sectionId = null;
 var sessionId = null;
 var participantMatch = {};
+var participantTable = null;
 
 $(document).ready(function () {
     // Get course for dropdown
@@ -49,6 +50,10 @@ $(document).ready(function () {
         $('#clear-btn').click(function(){
             clearAllParticipants();
         })
+    });
+
+    $('#save-btn').click(function(){
+        saveMatches();
     });
 
     // When a user selects a section of a course
@@ -345,6 +350,8 @@ function getParticipant(section_id, session_id) {
                     "dom": '<"toolbar">frtip'
                 });
 
+                /*participantTable = table;*/
+
                 // adding Custom tool bar
                 var toolbar = $("div.toolbar");
                 var selectAllBtn = $('<div>', {id:'selectAll-btn', class:"btn btn-primary", text:"Select All"});
@@ -379,6 +386,10 @@ function selectStudent(id) {
     if (selectedStudentId == null) {
         $("#" + id + "-cl-row").addClass('success');
         selectedStudentId = id;
+    }
+    else if(selectedStudentId == id){
+        $("#" + selectedStudentId + "-cl-row").removeClass('success');
+        selectedStudentId = null;
     }
     else {
         $("#" + selectedStudentId + "-cl-row").removeClass('success');
@@ -431,4 +442,63 @@ function  clearAllParticipants(){
     }
 }
 
+
+/**
+ * Description:
+ * Parameters:
+ * Returns:
+ */
+function  saveMatches(){
+    var student = true;
+    var participant = true;
+
+    $('#error-message').empty();
+
+    // check for data being selected
+    if(selectedStudentId == null || selectedStudentId == undefined){
+        $('#error-message').append(
+            $('<div>',{text:"Please select a student.", class:'col-lg-12 alert alert-warning '})
+        );
+        student = false;
+    }
+
+    if($.isEmptyObject(participantMatch)){
+        $('#error-message').append(
+            $('<div>',{text:"Please select a participant.", class:'col-lg-12 alert alert-warning '})
+        );
+        participant = false;
+    }
+
+    if(student && participant){
+        var data = {'studentId': selectedStudentId, 'matches': participantMatch};
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: data,
+            url: url + 'matchapi/match'
+        })
+            .done(function(json){
+                var data = JSON.parse(json);
+
+                // remove successfull match from table
+                for(var key in data){
+                    if(data[key] == 's'){
+                        /*participantTable.row('#' + key + '-pl-row').remove().draw();*/
+                        $('#' + key + '-pl-row').remove()
+                    }
+                    else{
+                        $('#' + key + '-pl-row').removeClass('success');
+                        $('#' + key + '-pl-row').addClass('error');
+                    }
+                }
+
+            })
+            .fail(function(){})
+
+    }
+    else{
+        console.log("data not saved");
+    }
+
+}
 

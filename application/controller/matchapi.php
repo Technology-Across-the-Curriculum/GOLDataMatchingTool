@@ -55,5 +55,25 @@ class Matchapi extends Controller
         echo json_encode($data);
     }
 
+    public function match(){
+        require APP . 'class/entity/session.php';
+        $sessionEntity = new SessionEntity();
+        $data = $_POST;
+
+        foreach($data['matches'] as $id => $confirm ){
+            if($confirm){
+                if($sessionEntity->updateMatchedParticipants($data['studentId'], $id)){
+                    $data['matches'][$id] = 's';
+                }
+                else{
+                    $data['matches'][$id] = 'f';
+                }
+
+            }
+        }
+
+        echo json_encode($data['matches']);
+    }
+
 
 }

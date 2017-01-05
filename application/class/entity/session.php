@@ -63,6 +63,20 @@ where pl.classlist_id = (
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function updateMatchedParticipants($student_id, $participant_id){
+        $result = "";
+        $sql = 'UPDATE participant_list set classlist_id = :sid WHERE id = :pid';
+        $query = $this->db->prepare($sql);
+        $parameters = array(':sid' => $student_id, ':pid'=> $participant_id);
+        $query->execute($parameters);
+
+        if($query->rowCount() < 0){
+            return false;
+        }
+        return true;
+
+    }
+
 }
 
 // Insert WordSalad score into *wordsalad_score table for the current database

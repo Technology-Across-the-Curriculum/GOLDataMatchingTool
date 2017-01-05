@@ -64,6 +64,11 @@
                 </div>
             </div>
 
+            <!-- Error messages !-->
+            <div id="error-message" class="row">
+            </div>
+
+
             <!-- Course and Section selection !-->
             <div class="row">
                 <!-- course selection !-->
@@ -148,6 +153,13 @@
                         </div>
                         <!-- /.panel-collapse !-->
                     </div>
+                </div>
+            </div>
+
+            <!-- Save Buttom !-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="save-btn" class="btn btn-success">Save</div>
                 </div>
             </div>
 
