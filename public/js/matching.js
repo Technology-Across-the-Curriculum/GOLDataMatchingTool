@@ -253,6 +253,7 @@ function getClasslist(id) {
                 tableBody.append(tableBodyRow)
             }
 
+            // Building table
             tableHead.append(tableHeadRow);
             table.append(tableHead);
             table.append(tableBody);
@@ -264,8 +265,6 @@ function getClasslist(id) {
                 bPaginate: false,
                 stripeClasses: []
             });
-
-
         })
         .fail(function () {
             console.log('matchapi/getSection' + id + ' : failed')
@@ -349,12 +348,20 @@ function getParticipant(section_id, session_id) {
                 table.dataTable({
                     scrollY: 200,
                     bPaginate: false,
-                    stripeClasses: []
+                    stripeClasses: [],
+                    "dom": '<"toolbar">frtip'
                 });
 
-                for(var p in participantList){
-                    participantMatch[p.id] = 0;
-                }
+                // adding Custom tool bar
+                var toolbar = $("div.toolbar");
+                var selectAllBtn = $('<div>', {id:'selectAll-btn', class:"btn btn-primary", text:"Select All"});
+                var clearBtn = $('<div>', {id:'clear-btn', class:'btn btn-warning', text:'Clear'});
+                var deleteBtn = $('<div>', {id:'delete-btn', class:'btn btn-danger', text: 'Delete Selected'});
+                toolbar.append(selectAllBtn);
+                toolbar.append(clearBtn);
+                toolbar.append(deleteBtn);
+
+
 
             }
             else {
@@ -400,7 +407,7 @@ function selectParticipant(id) {
     console.log(id);
     if (participantMatch[id]) {
         $("#" + id + "-pl-row").removeClass('success');
-        participantMatch[id] = 0;
+        delete participantMatch[id];
         console.log(participantMatch);
     }
     else{

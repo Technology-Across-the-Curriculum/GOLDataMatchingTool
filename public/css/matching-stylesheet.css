@@ -13,3 +13,9 @@ tr.warning {
 tr.info {
     background-color: #d9edf7 !important;
 }
+
+
+/* Participant list tool bar styling */
+div.toolbar div.btn {
+    margin: 0px 5px;
+}
