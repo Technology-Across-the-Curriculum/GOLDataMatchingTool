@@ -67,7 +67,7 @@
             <!-- Course and Section selection !-->
             <div class="row">
                 <!-- course selection !-->
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="courses"><h4>Select Course:</h4></label>
                         <select class="form-control" id="courses">
@@ -77,7 +77,7 @@
                 </div>
 
                 <!-- section selection !-->
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="sections"><h4>Select Section:</h4></label>
                         <select class="form-control" id="sections">
@@ -88,7 +88,7 @@
                 </div>
 
                 <!-- session selection !-->
-                <div class="col-lg-4">
+                <!--<div class="col-lg-4">
                     <div class="form-group">
                         <label for="session"><h4>Select Session:</h4></label>
                         <select class="form-control" id="session">
@@ -96,7 +96,7 @@
                         </select>
 
                     </div>
-                </div>
+                </div>-->
             </div>
 
             <!-- Classlist Panel !-->

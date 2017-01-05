@@ -41,24 +41,22 @@ $(document).ready(function () {
                 selectStudent(pid[0]);
             }
         });
+
+        $('#selectAll-btn').click(function(){
+            selectAllParticipants();
+        });
+
+        $('#clear-btn').click(function(){
+            clearAllParticipants();
+        })
     });
 
     // When a user selects a section of a course
     // get the class list
-    $("#session").change(function () {
+    /*$("#session").change(function () {
         sessionId = $(this).val();
 
-    });
-
-    /*$("#select-all").click(function(){
-        var table = $("table#participant-table > tbody");
-        console.log(table);
-        for(var row in table.children()[0]){
-            console.log(row.id());
-            participantMatch[row.split('-')[0]] = 1;
-        }
-
-    })*/
+    });*/
 
 
 });
@@ -154,7 +152,6 @@ function getSection(id) {
  */
 function getSession(id) {
     var data = null; // hold data to be returned
-    console.log(id);
 
     // Makes an ajax call to backfillapi/fillNode
     // returns stats of filled node
@@ -282,8 +279,6 @@ function getClasslist(id) {
  */
 function getParticipant(section_id, session_id) {
     var data = null; // hold data to be returned
-    console.log("section_id " + section_id);
-    console.log("session_id " + session_id);
 
     // Makes an ajax call to backfillapi/fillNode
     // returns stats of filled node
@@ -293,10 +288,7 @@ function getParticipant(section_id, session_id) {
         url: url + 'matchapi/getParticipant/' + section_id + '/' + session_id
     })
         .done(function (json) {
-            console.log(json);
             data = JSON.parse(json);
-            console.log(data);
-
             // applying courses to dropdown
             var keys = data['keys'];
             var participantList = data['list'];
@@ -313,7 +305,7 @@ function getParticipant(section_id, session_id) {
             }
 
             if (participantList != "empty" && keys != "empty") {
-                // adding header to the table
+               // adding header to the table
                 for (var i = 0; i < keys.length; i++) {
                     tableHeadRow.append($('<th/>', {text: keys[i]}));
                 }
@@ -343,6 +335,7 @@ function getParticipant(section_id, session_id) {
                 table.append(tableHead);
                 table.append(tableBody);
                 wrapper.append(table);
+                console.log(data);
 
                 // Setting DataTables Options
                 table.dataTable({
@@ -383,8 +376,6 @@ function getParticipant(section_id, session_id) {
  * Returns:
  */
 function selectStudent(id) {
-    console.log(id);
-
     if (selectedStudentId == null) {
         $("#" + id + "-cl-row").addClass('success');
         selectedStudentId = id;
@@ -394,8 +385,6 @@ function selectStudent(id) {
         $("#" + id + "-cl-row").addClass('success');
         selectedStudentId = id;
     }
-
-
 }
 
 /**
@@ -404,20 +393,42 @@ function selectStudent(id) {
  * Returns:
  */
 function selectParticipant(id) {
-    console.log(id);
     if (participantMatch[id]) {
         $("#" + id + "-pl-row").removeClass('success');
         delete participantMatch[id];
-        console.log(participantMatch);
     }
     else{
         $("#" + id + "-pl-row").addClass('success');
         participantMatch[id] = 1;
-        console.log(participantMatch)
     }
+}
 
+/**
+ * Description:
+ * Parameters:
+ * Returns:
+ */
+function selectAllParticipants(){
+    var tbody = $('#participant-table-wrapper table tbody');
+    var rows = tbody.children();
+    rows.each(function(){
+        var id = this.id.split('-')[0];
+        $("#" + this.id).addClass('success');
+        participantMatch[id]= 1
+    });
+}
 
-
+/**
+ * Description:
+ * Parameters:
+ * Returns:
+ */
+function  clearAllParticipants(){
+    var tempParticipantMatch = participantMatch;
+    for(var key in tempParticipantMatch){
+        $("#" + key + "-pl-row").removeClass('success');
+        delete participantMatch[key];
+    }
 }
 
 
