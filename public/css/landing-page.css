@@ -1,0 +1,16 @@
+nav .container{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.main-content {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0px;
+}
+
+.content {
+    text-align: center;
+    display: inline-block;
+}
