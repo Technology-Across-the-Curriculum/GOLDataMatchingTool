@@ -58,8 +58,7 @@ INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
         $sql = "SELECT 
                   id, 
                   student_id as 'SID',
-                  first_name as 'Frist', 
-                  middle_name as 'Middle', 
+                  first_name as 'Frist',  
                   last_name as 'Last',
                   email                  
                 FROM classlist 
