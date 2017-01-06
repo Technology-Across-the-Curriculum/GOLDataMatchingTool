@@ -71,8 +71,26 @@ class Matchapi extends Controller
 
             }
         }
-
         echo json_encode($data['matches']);
+    }
+
+    public function deleteRecord(){
+        require APP . 'class/entity/session.php';
+        $sessionEntity = new SessionEntity();
+        $data = $_POST;
+
+        foreach($data as $id => $confirm ){
+            if($confirm){
+                if($sessionEntity->deleteParticipant($id)){
+                    $data[$id] = 's';
+                }
+                else{
+                    $data[$id] = 'f';
+                }
+
+            }
+        }
+        echo json_encode($data);
     }
 
 

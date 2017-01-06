@@ -64,10 +64,22 @@ where pl.classlist_id = (
     }
 
     public function updateMatchedParticipants($student_id, $participant_id){
-        $result = "";
         $sql = 'UPDATE participant_list set classlist_id = :sid WHERE id = :pid';
         $query = $this->db->prepare($sql);
         $parameters = array(':sid' => $student_id, ':pid'=> $participant_id);
+        $query->execute($parameters);
+
+        if($query->rowCount() < 0){
+            return false;
+        }
+        return true;
+
+    }
+
+    public function deleteParticipant($participant_id){
+        $sql = 'DELETE FROM participant_list WHERE id = :pid';
+        $query = $this->db->prepare($sql);
+        $parameters = array(':pid'=> $participant_id);
         $query->execute($parameters);
 
         if($query->rowCount() < 0){
