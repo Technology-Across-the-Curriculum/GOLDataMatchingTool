@@ -340,7 +340,6 @@ function getParticipant(section_id, session_id) {
                 table.append(tableHead);
                 table.append(tableBody);
                 wrapper.append(table);
-                console.log(data);
 
                 // Setting DataTables Options
                 table.dataTable({
@@ -483,8 +482,7 @@ function  saveMatches(){
                 // remove successfull match from table
                 for(var key in data){
                     if(data[key] == 's'){
-                        /*participantTable.row('#' + key + '-pl-row').remove().draw();*/
-                        $('#' + key + '-pl-row').remove()
+                        $('#' + key + '-pl-row').addClass('warning');
                     }
                     else{
                         $('#' + key + '-pl-row').removeClass('success');
