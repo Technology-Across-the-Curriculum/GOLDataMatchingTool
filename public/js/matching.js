@@ -43,31 +43,26 @@ $(document).ready(function () {
             }
         });
 
+        // Wiring Selected All button
         $('#selectAll-btn').click(function () {
             selectAllParticipants();
         });
 
+        // Wiring Clear button
         $('#clear-btn').click(function () {
             clearAllParticipants();
         });
 
+        // Wiring Delete button
         $('#delete-btn').click(function () {
             deleteSelected();
         });
     });
 
+    // Wiring Save button
     $('#save-btn').click(function () {
         saveMatches();
     });
-
-
-    // When a user selects a section of a course
-    // get the class list
-    /*$("#session").change(function () {
-     sessionId = $(this).val();
-
-     });*/
-
 
 });
 
@@ -126,6 +121,7 @@ function getSection(id) {
         url: url + 'matchapi/getSection/' + id
     })
         .done(function (json) {
+            var i = 0;
             data = JSON.parse(json);
 
             // applying courses to dropdown
@@ -136,12 +132,12 @@ function getSection(id) {
             // remove section when a new crouse is selected.
             if (numChildren > 1) {
 
-                for (var i = 1; i < numChildren; i++) {
+                for ( i = 1; i < numChildren; i++) {
                     listChildren[i].remove();
                 }
             }
 
-            for (var i = 0; i < data.length; i++) {
+            for ( i = 0; i < data.length; i++) {
                 courseDropdown.append('<option value="' + data[i].id + '">' + data[i].crn + ' ' + data[i].code + '</option>');
             }
 
@@ -171,6 +167,7 @@ function getSession(id) {
         url: url + 'matchapi/getSession/' + id
     })
         .done(function (json) {
+            var i = 0;
             data = JSON.parse(json);
 
             // applying courses to dropdown
@@ -181,12 +178,12 @@ function getSession(id) {
             // remove section when a new crouse is selected.
             if (numChildren > 1) {
 
-                for (var i = 1; i < numChildren; i++) {
+                for ( i = 1; i < numChildren; i++) {
                     listChildren[i].remove();
                 }
             }
 
-            for (var i = 0; i < data.length; i++) {
+            for ( i = 0; i < data.length; i++) {
                 courseDropdown.append('<option value="' + data[i].id + '">' + data[i].date_created + '</option>');
             }
 
@@ -308,7 +305,6 @@ function getParticipant(section_id, session_id) {
             var tableHeadRow = $('<tr/>');
             var tableBody = $('<tbody/>');
 
-
             // removing table from page
             if (wrapper.children().length > 0) {
                 wrapper.empty();
@@ -358,26 +354,54 @@ function getParticipant(section_id, session_id) {
                     "dom": '<"toolbar">frtip'
                 });
 
-                /*participantTable = table;*/
-
                 // adding Custom tool bar
                 var toolbar = $("div.toolbar");
+                var buttons = $('<div>',{id:"button-toolbar", class:"col-lg-4"});
+                var legend  = $('<div>',{id:"legend-toolbar", class:"col-lg-8"});
                 var selectAllBtn = $('<div>', {id: 'selectAll-btn', class: "btn btn-primary", text: "Select All"});
                 var clearBtn = $('<div>', {id: 'clear-btn', class: 'btn btn-warning', text: 'Clear'});
                 var deleteBtn = $('<div>', {id: 'delete-btn', class: 'btn btn-danger', text: 'Delete Selected'});
-                toolbar.append(selectAllBtn);
-                toolbar.append(clearBtn);
-                toolbar.append(deleteBtn);
+                var selectedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+                    $('<span>', {class:"fa fa-square fa-2x key-color key-info"}),
+                    $('<span>',{class:"key-text", text:"Selected"})
 
+                );
+                var deletedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+                    $('<span>', {class:"fa fa-square fa-2x key-color key-error"}),
+                    $('<span>',{class:"key-text", text:"Delete Success"})
 
+                );
+                var matchedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+                    $('<span>', {class:"fa fa-square fa-2x key-color key-success"}),
+                    $('<span>',{class:"key-text", text:"Match Success"})
+
+                );
+                var errorKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+                    $('<span>', {class:"fa fa-square fa-2x key-color key-warning"}),
+                    $('<span>',{class:"key-text", text:"error"})
+
+                );
+
+                // append buttons to buttons bar
+                buttons.append(selectAllBtn);
+                buttons.append(clearBtn);
+                buttons.append(deleteBtn);
+
+                // appending keys to legend bar
+                legend.append(selectedKey);
+                legend.append(deletedKey);
+                legend.append(matchedKey);
+                legend.append(errorKey);
+
+                toolbar.addClass('row');
+                toolbar.append(buttons);
+                toolbar.append(legend);
             }
             else {
                 wrapper.append(
                     $('<div>', {class: "alert alert-success", text: "No Unmatched Entries fround"})
                 );
             }
-
-
         })
         .fail(function () {
             console.log('matchapi/getSection' + id + ' : failed')
@@ -505,9 +529,6 @@ function saveMatches() {
             })
             .fail(function () {
             });
-
-
-
     }
     else {
         console.log("data not saved");

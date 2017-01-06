@@ -7,7 +7,7 @@ tr.error {
 }
 
 tr.warning {
-    background-color: #fcf8e3 !important;
+    background-color: #fef0aa !important;
 }
 
 tr.info {
@@ -21,4 +21,35 @@ tr.primary{
 /* Participant list tool bar styling */
 div.toolbar div.btn {
     margin: 0px 5px;
+}
+
+/* Legend Key styleing */
+.key-container {
+    display: inline-block;
+    margin: 0px 3px;
+}
+.key-text{
+
+}
+.key-color {
+    vertical-align: middle;
+    margin: 0px 2px;
+    /*font-size: 40px;*/
+}
+.key-success{
+    color:#dff0d8 !important;
+}
+
+.key-error{
+    color: #f2dede !important;
+}
+
+.key-warning{
+    color: #fef0aa !important;
+}
+.key-info{
+    color:#d9edf7 !important;
+}
+.key-primary{
+    color: #337ab7 !important;
 }
