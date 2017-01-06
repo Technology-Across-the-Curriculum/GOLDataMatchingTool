@@ -13,6 +13,9 @@ tr.warning {
 tr.info {
     background-color: #d9edf7 !important;
 }
+tr.primary{
+    background-color: #337ab7 !important;
+}
 
 
 /* Participant list tool bar styling */
