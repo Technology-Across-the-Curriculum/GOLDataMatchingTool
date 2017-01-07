@@ -71,8 +71,16 @@
 
             <!-- Course and Section selection !-->
             <div class="row">
+
+                <!-- Save Buttom !-->
+                <div class="col-lg-4">
+                    <h4>Save Changes:</h4>
+                    <div id="save-btn" class="col-lg-4 btn btn-success">Save</div>
+                </div>
+
+
                 <!-- course selection !-->
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label for="courses"><h4>Select Course:</h4></label>
                         <select class="form-control" id="courses">
@@ -82,7 +90,7 @@
                 </div>
 
                 <!-- section selection !-->
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label for="sections"><h4>Select Section:</h4></label>
                         <select class="form-control" id="sections">
@@ -156,12 +164,6 @@
                 </div>
             </div>
 
-            <!-- Save Buttom !-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="save-btn" class="btn btn-success">Save</div>
-                </div>
-            </div>
 
         </div>
 
