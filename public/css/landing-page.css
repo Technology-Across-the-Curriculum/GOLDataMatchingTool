@@ -1,3 +1,31 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: table;
+}
+.main-content{
+    margin-top: 50px;
+}
+
+.footer{
+    font-size: 12px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    padding: 0px;
+    margin: 0px;
+
+}
+h1{
+    font-size: 98px;
+    font-weight: lighter;
+}
+
 nav .container{
     padding-right: 15px;
     padding-left: 15px;
@@ -13,4 +41,8 @@ nav .container{
 .content {
     text-align: center;
     display: inline-block;
+}
+
+.modal-body form{
+    padding: 10px;
 }

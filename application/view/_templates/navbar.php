@@ -26,7 +26,9 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php echo URL;?>dashboard">Dashboard</a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="modal" role="button"  data-target="#loginModal" aria-haspopup="true" aria-expanded="false">Login</a>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
