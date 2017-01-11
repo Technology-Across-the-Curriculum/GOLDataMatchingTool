@@ -17,6 +17,16 @@ class Application
      */
     public function __construct()
     {
+        require APP . 'class/entity/session.php';
+        $sessionValidater = new SessionValidater();
+
+        $sessionValidater->startSession();
+
+        if(!$sessionValidater->checksession()){
+            $sessionValidater->setGuest();
+        }
+
+
         // create array with URL parts in $url
         $this->splitUrl();
 
@@ -27,34 +37,27 @@ class Application
             $page = new Home();
             $page->index();
         }
-        // process the request for the given url.
-        elseif (file_exists(APP . 'controller/' . $this->url_controller . '.php')) {
-            // here we did check for controller: does such a controller exist ?
-
-            // if so, then load this file and create this controller
-            // example: if controller would be "car", then this line would translate into: $this->car = new car();
-            require APP . 'controller/' . $this->url_controller . '.php';
-            $this->url_controller = new $this->url_controller();
-
-            // check for method: does such a method exist in the controller ?
-            if (method_exists($this->url_controller, $this->url_action)) {
-
-                if (!empty($this->url_params)) {
-                    // Call the method and pass arguments to it
-                    call_user_func_array(array($this->url_controller, $this->url_action), $this->url_params);
-                } else {
-                    // If no parameters are given, just call the method without parameters, like $this->home->method();
-                    $this->url_controller->{$this->url_action}();
+        elseif(!$sessionValidater->authenticationStatus()){
+            if($this->checkAllowedURL()){
+                if($this->controllerExits()) {
+                    $this->processRequest();
                 }
-
-            } else {
-                if (strlen($this->url_action) == 0) {
-                    // no action defined: call the default index() method of a selected controller
-                    $this->url_controller->index();
-                } else {
+                else{
                     header('location: ' . URL . 'error');
                 }
             }
+            else{
+                header('location: ' . URL . 'error');
+            }
+            
+
+        }
+        // process the request for the given url.
+        elseif ($this->controllerExits()) {
+            // here we did check for controller: does such a controller exist ?
+
+            $this->processRequest();
+
         } else {
             header('location: ' . URL . 'error');
         }
@@ -88,6 +91,61 @@ class Application
             //echo 'Controller: ' . $this->url_controller . '<br>';
             //echo 'Action: ' . $this->url_action . '<br>';
             //echo 'Parameters: ' . print_r($this->url_params, true) . '<br>';
+        }
+    }
+
+    /**
+     * Checks if a url is allows for guest users
+     * @return bool
+     */
+    private function checkAllowedURL(){
+        $urls = unserialize(SESSION_EXCEPTIONS);
+        $result = false;
+        foreach($urls as $url){
+            if ($url == $this->url_controller){
+                $result = true;
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Checks if a controller exits
+     * @return bool
+     */
+    private function controllerExits(){
+        return file_exists(APP . 'controller/' . $this->url_controller . '.php');
+    }
+
+    /**
+     * Process the url request
+     */
+    private function processRequest(){
+        // if so, then load this file and create this controller
+        // example: if controller would be "car", then this line would translate into: $this->car = new car();
+        require APP . 'controller/' . $this->url_controller . '.php';
+        $this->url_controller = new $this->url_controller();
+
+        // check for method: does such a method exist in the controller ?
+        if (method_exists($this->url_controller, $this->url_action)) {
+
+            if (!empty($this->url_params)) {
+                // Call the method and pass arguments to it
+                call_user_func_array(array($this->url_controller, $this->url_action), $this->url_params);
+            } else {
+                // If no parameters are given, just call the method without parameters, like $this->home->method();
+                $this->url_controller->{$this->url_action}();
+            }
+
+        } else {
+            if (strlen($this->url_action) == 0) {
+                // no action defined: call the default index() method of a selected controller
+                $this->url_controller->index();
+            } else {
+                header('location: ' . URL . 'error');
+            }
         }
     }
 

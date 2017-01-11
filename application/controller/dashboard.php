@@ -113,8 +113,8 @@ class Dashboard extends Controller
      */
     public function session()
     {
-        require APP . 'class/entity/session.php';
-        $sessionEntity = new SessionEntity();
+        require APP . 'class/entity/filesession.php';
+        $sessionEntity = new FilesessionEntity();
         $sessionList = $sessionEntity->getSessionNoID();
 
         $keys = $this->_getObjectKeys($sessionList[0]);
