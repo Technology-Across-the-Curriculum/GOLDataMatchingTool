@@ -7,7 +7,7 @@
  * Date: 12/13/16
  * Time: 1:08 PM
  */
-class SessionValidater extends Entity
+class Session extends Entity
 {
     private $guest = 'Guest';
 
@@ -53,7 +53,40 @@ class SessionValidater extends Entity
     public function authenticationStatus()
     {
         return $_SESSION['authenticated'];
-}
+    }
+
+    /**
+     * validates if the user is correct.
+     * @param $username
+     * @param $password
+     * @return bool
+     */
+    public function validate($username, $password){
+        $userValidate = false;
+        $passwordValidate = false;
+        $result = false;
+
+        if(md5($username) == md5(USER)){
+            $userValidate = true;
+        }
+
+        if(md5($password) == md5(PASSWORD)){
+            $passwordValidate = true;
+        }
+
+        if($userValidate && $passwordValidate){
+            $result = true;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Change Authentication Status to true
+     */
+    public function authenticate(){
+        $_SESSION['authenticated'] = true;
+    }
 
 }
 

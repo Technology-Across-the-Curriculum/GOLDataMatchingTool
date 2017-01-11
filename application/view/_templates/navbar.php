@@ -22,13 +22,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo URL;?>home">Home</a></li>
+                <li><a href="<?php echo URL;?>home">Home</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="modal" role="button"  data-target="#loginModal" aria-haspopup="true" aria-expanded="false">Login</a>
+                    <a href="<?php echo URL;?>home/login/">Login</a>
                 </li>
+                <!--<li>
+                    <a href="#" class="dropdown-toggle" data-toggle="modal" role="button"  data-target="#loginModal" aria-haspopup="true" aria-expanded="false">Login</a>
+                </li>-->
             </ul>
         </div><!--/.nav-collapse -->
     </div>

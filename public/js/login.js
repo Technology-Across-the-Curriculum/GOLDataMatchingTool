@@ -1,23 +1,49 @@
-$(document).ready(function () {
+/**
+ * Created by nathan on 11/30/15.
+ */
+$(function () {
 
-    $('#login').click(function () {
-        var username = $('#username').val();
-        var password = $('#password').val();
+    $('form').submit(function (event) {
+        var logindata = {
+            'username': null,
+            'password': null
+        };
 
+        logindata['username'] = $('[id="username"]').val();
+        logindata['password'] = $('[id="password"]').val();
+
+        // Check to see if password matches
         $.ajax({
-            type: 'POST',
-            data: {'user': username, 'pass': password},
+            type: "post",
             async: true,
-            url: url + 'loginapi/validate/'
+            url: url + 'home/checklogin',
+            data: logindata
         })
-            .done(function (json) {
-                console.log(json);
-                var data = JSON.parse(json);
+            .done(function (data) {
+                var result = JSON.parse(data);
+                if (result['error'] == true) {
+                    ShowError(true);
+                }
+                else if (result['error'] == false) {
+                    window.location.href = url + 'dashboard/index';
+                }
 
-                console.log(data);
             })
             .fail(function () {
-                console.log('ERROR: Could not reach url.')
-            })
-    })
+                alert("Password Check failed");
+            });
+        return false;
+    });
 });
+
+// Shoes error login informaion
+function ShowError(display){
+    var error = $('#loginerror');
+    
+    if(error.hasClass('hidden')){
+        error.removeClass('hidden');
+    }
+    else if(display == false && !(error.hasClass('hidden'))){
+        error.addClass('hidden');
+    }
+}

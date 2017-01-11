@@ -10,6 +10,10 @@ body {
 }
 .main-content{
     margin-top: 50px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0px;
 }
 
 .footer{
@@ -17,8 +21,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6{
-    padding: 0px;
-    margin: 0px;
+    /*padding: 0px;
+    margin: 0px;*/
 
 }
 h1{
@@ -26,23 +30,15 @@ h1{
     font-weight: lighter;
 }
 
-nav .container{
+/*nav .container{
     padding-right: 15px;
     padding-left: 15px;
-}
-
-.main-content {
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0px;
-}
-
-.content {
-    text-align: center;
-    display: inline-block;
-}
+}*/
 
 .modal-body form{
     padding: 10px;
+}
+
+.login-form{
+    width: 100px;
 }

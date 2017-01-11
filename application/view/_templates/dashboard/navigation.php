@@ -21,7 +21,9 @@
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
-
+        <li>
+            <a href="<?php echo URL;?>home/logout">Login</a>
+        </li>
     </ul>
     <!-- /.navbar-top-links -->
 
