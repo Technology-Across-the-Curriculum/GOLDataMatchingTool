@@ -24,11 +24,14 @@
 
 <div class="main-content">
     <div class="content">
+        <?php
+        if($error){ ?>
         <div class="row">
             <div class="col-lg-12 alert alert-warning" >
                 <h4><i class="fa fa-exclamation-triangle"></i> Please login to an account.</h4>
             </div>
         </div>
+        <?php } ?>
         <header class="col-lg-12">
             <h1><?php echo APP_NAME; ?></h1>
         </header>
@@ -89,5 +92,13 @@
 <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
 <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script>
+    var url = '<?php echo URL; ?>';
+</script>
+
+<!-- Login javascript !-->
+<script src="<?php echo URL; ?>js/login.js"></script>
 </body>
 </html>

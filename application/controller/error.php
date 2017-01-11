@@ -19,14 +19,4 @@ class error extends Controller
         // load views
         require APP . 'view/error/index.php';
     }
-
-    /**
-     * PAGE: Login
-     * This method handles the error page that will be shown when a user is not loged in;
-     */
-    public function login()
-    {
-        // load views
-        require APP . 'view/error/login.php';
-    }
 }

@@ -27,13 +27,6 @@ class Application
             $page = new Home();
             $page->index();
         }
-        // check if a session has been started.
-        elseif(session_status() == PHP_SESSION_NONE && $this->url_controller != 'home'){
-            require APP . 'controller/error.php';
-            $page = new Error();
-            $page->login();
-
-        }
         // process the request for the given url.
         elseif (file_exists(APP . 'controller/' . $this->url_controller . '.php')) {
             // here we did check for controller: does such a controller exist ?
@@ -97,4 +90,5 @@ class Application
             //echo 'Parameters: ' . print_r($this->url_params, true) . '<br>';
         }
     }
+
 }

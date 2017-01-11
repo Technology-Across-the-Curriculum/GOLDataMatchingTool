@@ -96,7 +96,7 @@
                                         foreach ($studentKeys as $key)
                                             echo '<th>' . $key . '</th>'
                                         ?>
-                                        <th>Options</th>
+                                        <!--<th>Options</th>-->
                                         </thead>
                                         <tbody>
 
@@ -107,14 +107,16 @@
                                                 <?php foreach ($student as $key => $value) {
                                                     echo '<td>' . $value . '</td>';
                                                 } ?>
-                                                <td>
-                                                    <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') ?>"
+
+                                                <!-- Options not needed for students at the time !-->
+                                                <!--<td>
+                                                    <a href="<?php /*echo URL; */?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */?>"
                                                        class="btn btn-default">Select</a>
-                                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                    <a href="<?php /*echo URL; */?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */?>"
                                                        class="btn btn-warning">Edit</a>
-                                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                    <a href="<?php /*echo URL; */?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */?>"
                                                        class="btn btn-danger">Delete</a>
-                                                </td>
+                                                </td>-->
                                             </tr>
                                         <?php } ?>
 
@@ -163,11 +165,11 @@
                                                     echo '<td>' . $value . '</td>';
                                                 } ?>
                                                 <td>
-                                                    <a href="<?php echo URL; ?>course/select/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                    <a href="<?php echo URL; ?>dashboard/sessionDetail/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
                                                        class="btn btn-default">Select</a>
-                                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                    <a href="<?php echo URL; ?>dashboard/sessionEdit/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
                                                        class="btn btn-warning">Edit</a>
-                                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
+                                                    <a href="<?php echo URL; ?>dashboard/sessionDelete/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
                                                        class="btn btn-danger">Delete</a>
                                                 </td>
                                             </tr>
