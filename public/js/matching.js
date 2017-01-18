@@ -295,6 +295,7 @@ function getParticipant(section_id, session_id) {
         url: url + 'matchapi/getParticipant/' + section_id + '/' + session_id
     })
         .done(function (json) {
+            console.log(json);
             data = JSON.parse(json);
             // applying courses to dropdown
             var keys = data['keys'];
