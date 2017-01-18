@@ -24,6 +24,9 @@ class Home extends Controller
         // $this->_loadEntity($entities);
     }
 
+
+    /* - - - - Views - - - - */
+
     /**
      * PAGE: index
      * This method handles what happens when you move to http://yourproject/home/index (which is the default page btw)
@@ -33,6 +36,37 @@ class Home extends Controller
         // load view
         require APP . 'view/home/index.php';
 
+    }
+
+    public function login(){
+        // load view
+        require APP . 'view/home/login.php';
+    }
+
+    public function logout(){
+        session_destroy();
+        session_start();
+        $_SESSION['authenticated'] = false;
+        header('location: ' . URL . 'home/index');
+    }
+
+    /* - - - Ajax - - - - */
+    public function checklogin(){
+        $result['error'] = null;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Creates User Entity
+            $session = new Session();
+            $data = $_POST;
+            $isValidate = $session->validate($data['username'], $data['password']);
+            if ($isValidate) {
+                $session->authenticate();
+                $result['error'] = false;
+            }
+            else{
+                $result['error'] = true;
+            }
+        }
+        echo json_encode($result);
     }
 
 }

@@ -7,86 +7,85 @@
  * Date: 12/13/16
  * Time: 1:08 PM
  */
-class SessionEntity extends Entity
+class Session extends Entity
 {
-    public function getSession()
+    private $guest = 'Guest';
+
+    /**
+     * start a php session
+     */
+    public function startSession()
     {
-        $sql = 'SELECT * FROM session';
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_OBJ);
+        session_start();
     }
 
-    public function getSessionNoID()
+    /**
+     * Check if the a session is authenticated
+     * @return bool|null
+     */
+    public function checksession()
     {
-        $sql = 'SELECT
-                  s.id,
-                  c.acronym,
-                  sec.crn,
-                  sec.code,
-                  s.guid,
-                  s.source_id,
-                  s.date_created
-                FROM session as s
-                  INNER JOIN section as sec ON s.section_id = sec.id
-                  INNER JOIN course as c On sec.course_id = c.id';
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    public function getSessionByID($id)
-    {
-        $sql = 'SELECT * FROM session WHERE id = :id';
-        $query = $this->db->prepare($sql);
-        $parameters = array(':id' => $id);
-        $query->execute($parameters);
-        return $query->fetch(PDO::FETCH_OBJ);
-    }
-
-    public function getParticipantNoMatch($section_id)
-    {
-        $sql = 'SELECT
-  pl.id,
-  pl.first_name AS "First",
-  pl.last_name  AS "Last",
-  pl.lmsid,
-  pl.email
-FROM participant_list pl
-where pl.classlist_id = (
-  SELECT cl.id from classlist cl
-  WHERE cl.first_name = "Darth" and cl.last_name = "Vader" and cl.section_id = :section_id
-)';
-        $query = $this->db->prepare($sql);
-        $parameters = array(':section_id' => $section_id);
-        $query->execute($parameters);
-        return $query->fetchAll(PDO::FETCH_OBJ);
-    }
-
-    public function updateMatchedParticipants($student_id, $participant_id){
-        $sql = 'UPDATE participant_list set classlist_id = :sid WHERE id = :pid';
-        $query = $this->db->prepare($sql);
-        $parameters = array(':sid' => $student_id, ':pid'=> $participant_id);
-        $query->execute($parameters);
-
-        if($query->rowCount() < 0){
-            return false;
+        $result = null;
+        if (array_key_exists('authenticated', $_SESSION)) {
+            if ($_SESSION['authenticated']) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+        } else {
+            $result = false;
         }
-        return true;
-
+        return $result;
     }
 
-    public function deleteParticipant($participant_id){
-        $sql = 'DELETE FROM participant_list WHERE id = :pid';
-        $query = $this->db->prepare($sql);
-        $parameters = array(':pid'=> $participant_id);
-        $query->execute($parameters);
+    /**
+     * Starts a guess session
+     */
+    public function setGuest()
+    {
+        $_SESSION['authenticated'] = false;
+    }
 
-        if($query->rowCount() < 0){
-            return false;
+    /**
+     * returns the the authentication status of the session.
+     * @return mixed
+     */
+    public function authenticationStatus()
+    {
+        return $_SESSION['authenticated'];
+    }
+
+    /**
+     * validates if the user is correct.
+     * @param $username
+     * @param $password
+     * @return bool
+     */
+    public function validate($username, $password){
+        $userValidate = false;
+        $passwordValidate = false;
+        $result = false;
+
+        if(md5($username) == md5(USER)){
+            $userValidate = true;
         }
-        return true;
 
+        if(md5($password) == md5(PASSWORD)){
+            $passwordValidate = true;
+        }
+
+        if($userValidate && $passwordValidate){
+            $result = true;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Change Authentication Status to true
+     */
+    public function authenticate(){
+        $_SESSION['authenticated'] = true;
     }
 
 }

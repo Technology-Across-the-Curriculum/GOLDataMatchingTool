@@ -40,7 +40,7 @@ class Matchapi extends Controller
     }
 
     public function getParticipant($section_id){
-        require APP . 'class/entity/session.php';
+        require APP . 'class/entity/filesession.php';
         $participantKey = null;
 
         $sessionEntity = new SessionEntity();
@@ -56,7 +56,7 @@ class Matchapi extends Controller
     }
 
     public function match(){
-        require APP . 'class/entity/session.php';
+        require APP . 'class/entity/filesession.php';
         $sessionEntity = new SessionEntity();
         $data = $_POST;
 
@@ -75,7 +75,7 @@ class Matchapi extends Controller
     }
 
     public function deleteRecord(){
-        require APP . 'class/entity/session.php';
+        require APP . 'class/entity/filesession.php';
         $sessionEntity = new SessionEntity();
         $data = $_POST;
 

@@ -21,7 +21,9 @@
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
-
+        <li>
+            <a href="<?php echo URL;?>home/logout">Login</a>
+        </li>
     </ul>
     <!-- /.navbar-top-links -->
 
@@ -32,19 +34,19 @@
                     <a href="<?php echo URL; ?>dashboard/index">Dashboard</a>
                 </li>
                 <li>
-                    <a href="<?php echo URL; ?>course/index">Courses</a>
+                    <a href="<?php echo URL; ?>dashboard/course">Courses</a>
                 </li>
                 <li>
-                    <a href="<?php echo URL; ?>classroom/index">Classroom</a>
+                    <a href="<?php echo URL; ?>dashboard/classroom">Classroom</a>
                 </li>
                 <li>
                     <a href="<?php echo URL; ?>match/index">Match Records</a>
                 </li>
                 <li>
-                    <a href="<?php echo URL; ?>section/index">Sections</a>
+                    <a href="<?php echo URL; ?>dashboard/section">Sections</a>
                 </li>
                 <li>
-                    <a href="<?php echo URL; ?>session/index">Sections</a>
+                    <a href="<?php echo URL; ?>dashboard/session">sessions</a>
                 </li>
             </ul>
         </div>

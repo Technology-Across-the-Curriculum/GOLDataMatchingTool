@@ -1,16 +1,44 @@
-nav .container{
-    padding-right: 15px;
-    padding-left: 15px;
+html, body {
+    height: 100%;
 }
 
-.main-content {
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: table;
+}
+.main-content{
+    margin-top: 50px;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
     padding: 0px;
 }
 
-.content {
-    text-align: center;
-    display: inline-block;
+.footer{
+    font-size: 12px;
+}
+
+h1, h2, h3, h4, h5, h6{
+    /*padding: 0px;
+    margin: 0px;*/
+
+}
+h1{
+    font-size: 98px;
+    font-weight: lighter;
+}
+
+/*nav .container{
+    padding-right: 15px;
+    padding-left: 15px;
+}*/
+
+.modal-body form{
+    padding: 10px;
+}
+
+.login-form{
+    width: 100px;
 }

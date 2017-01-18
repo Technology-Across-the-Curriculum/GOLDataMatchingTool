@@ -85,11 +85,11 @@
                                     echo '<td>' . $value . '</td>';
                                 } ?>
                                 <td>
-                                    <a href="<?php echo URL; ?>course/detail/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
+                                    <a href="<?php echo URL; ?>dashboard/courseDetail/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>course/edit/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
+                                    <a href="<?php echo URL; ?>dashboard/courseEdit/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>course/delete/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
+                                    <a href="<?php echo URL; ?>dashboard/courseDelete/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
                                        class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
