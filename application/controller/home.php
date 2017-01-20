@@ -55,11 +55,11 @@ class Home extends Controller
         $result['error'] = null;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Creates User Entity
-            $session = new Session();
+            $user = new User();
             $data = $_POST;
-            $isValidate = $session->validate($data['username'], $data['password']);
+            $isValidate = $user->validate($data['username'], $data['password']);
             if ($isValidate) {
-                $session->authenticate();
+                $user->authenticate();
                 $result['error'] = false;
             }
             else{
