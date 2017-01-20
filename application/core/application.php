@@ -17,13 +17,13 @@ class Application
      */
     public function __construct()
     {
-        require APP . 'class/entity/session.php';
-        $session = new Session();
+        require APP . 'class/entity/user.php';
+        $user = new User();
 
-        $session->startSession();
+        $user->startSession();
 
-        if(!$session->checksession()){
-            $session->setGuest();
+        if(!$user->checksession()){
+            $user->setGuest();
         }
 
 
@@ -37,7 +37,7 @@ class Application
             $page = new Home();
             $page->index();
         }
-        elseif(!$session->authenticationStatus()){
+        elseif(!$user->authenticationStatus()){
             if($this->checkAllowedURL()){
                 if($this->controllerExits()) {
                     $this->processRequest();

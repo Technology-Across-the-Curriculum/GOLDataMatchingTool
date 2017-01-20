@@ -7,7 +7,7 @@
  * Date: 12/13/16
  * Time: 1:08 PM
  */
-class SectionEntity extends Entity
+class Section extends Entity
 {
     public function getSections()
     {

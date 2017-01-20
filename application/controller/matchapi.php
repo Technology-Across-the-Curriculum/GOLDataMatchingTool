@@ -11,40 +11,40 @@ class Matchapi extends Controller
 {
     public function getCourse(){
         require APP . 'class/entity/course.php';
-        $courseEntity = new CourseEntity();
-        $courses = $courseEntity->getCourse();
+        $course = new Course();
+        $courses = $course->getCourse();
         echo json_encode($courses);
     }
 
     public function getSection($id){
         require APP . 'class/entity/course.php';
-        $courseEntity = new CourseEntity();
-        $sections = $courseEntity->getCourseSection($id);
+        $course = new Course();
+        $sections = $course->getCourseSection($id);
         echo json_encode($sections);
     }
 
     public function getSession($id){
         require APP . 'class/entity/section.php';
-        $sectionEntity = new SectionEntity();
-        $session = $sectionEntity->getSectionSession($id);
+        $session = new Section();
+        $session = $session->getSectionSession($id);
         echo json_encode($session);
     }
 
     public function getClasslist($id){
         require APP . 'class/entity/section.php';
-        $sectionEntity = new SectionEntity();
-        $studentList = $sectionEntity->getCensoredClassList($id);
+        $session = new Section();
+        $studentList = $session->getCensoredClassList($id);
         $studentKeys = $this->_getObjectKeys($studentList[0]);
         $data = array('keys' =>$studentKeys, 'list' => $studentList);
         echo json_encode($data);
     }
 
     public function getParticipant($section_id){
-        require APP . 'class/entity/filesession.php';
+        require APP . 'class/entity/session.php';
         $participantKey = null;
 
-        $sessionEntity = new SessionEntity();
-        $participantList = $sessionEntity->getParticipantNoMatch($section_id);
+        $session = new Session();
+        $participantList = $session->getParticipantNoMatch($section_id);
         if(!empty($participantList)) {
             $participantKey = $this->_getObjectKeys($participantList[0]);
         }
@@ -56,13 +56,13 @@ class Matchapi extends Controller
     }
 
     public function match(){
-        require APP . 'class/entity/filesession.php';
-        $sessionEntity = new SessionEntity();
+        require APP . 'class/entity/session.php';
+        $session = new Session();
         $data = $_POST;
 
         foreach($data['matches'] as $id => $confirm ){
             if($confirm){
-                if($sessionEntity->updateMatchedParticipants($data['studentId'], $id)){
+                if($session->updateMatchedParticipants($data['studentId'], $id)){
                     $data['matches'][$id] = 's';
                 }
                 else{
@@ -75,13 +75,13 @@ class Matchapi extends Controller
     }
 
     public function deleteRecord(){
-        require APP . 'class/entity/filesession.php';
-        $sessionEntity = new SessionEntity();
+        require APP . 'class/entity/session.php';
+        $session = new Session();
         $data = $_POST;
 
         foreach($data as $id => $confirm ){
             if($confirm){
-                if($sessionEntity->deleteParticipant($id)){
+                if($session->deleteParticipant($id)){
                     $data[$id] = 's';
                 }
                 else{
