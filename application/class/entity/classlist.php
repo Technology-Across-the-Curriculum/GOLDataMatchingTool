@@ -7,7 +7,7 @@
  * Date: 12/13/16
  * Time: 1:08 PM
  */
-class ClasslistEntity extends Entity
+class Classlist extends Entity
 {
     public function getClasslist()
     {

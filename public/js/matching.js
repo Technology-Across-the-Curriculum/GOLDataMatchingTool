@@ -545,7 +545,6 @@ function saveMatches() {
  */
 function deleteSelected() {
     var participant = true;
-    console.log(participantMatch);
     $('#error-message').empty();
 
 
@@ -566,7 +565,6 @@ function deleteSelected() {
             url: url + 'matchapi/deleteRecord'
         })
             .done(function (json) {
-                console.log(json);
                 var data = JSON.parse(json);
                 console.log(data);
 

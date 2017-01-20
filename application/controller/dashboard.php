@@ -22,7 +22,7 @@ class Dashboard extends Controller
      */
     public function course(){
         require APP . 'class/entity/course.php';
-        $courseEntity = new CourseEntity();
+        $courseEntity = new Course();
         $courselist = $courseEntity->getCourse();
 
         $keys = $this->_getObjectKeys($courselist[0]);
@@ -39,7 +39,7 @@ class Dashboard extends Controller
         require APP . 'class/entity/course.php';
 
         # Creating course entity object
-        $courseEntity = new CourseEntity();
+        $courseEntity = new Course();
 
         # Getting current course information
         $courseInfo = $courseEntity->getCourseByID($course_id);
@@ -59,7 +59,7 @@ class Dashboard extends Controller
     public function classroom()
     {
         require APP . 'class/entity/classroom.php';
-        $classroomEntity = new ClassroomEntity();
+        $classroomEntity = new Classroom();
         $classroomList = $classroomEntity->getClassroom();
 
         $keys = $this->_getObjectKeys($classroomList[0]);
@@ -75,7 +75,7 @@ class Dashboard extends Controller
     public function section()
     {
         require APP . 'class/entity/section.php';
-        $sectionEntity = new SectionEntity();
+        $sectionEntity = new Section();
         $sectionList = $sectionEntity->getSectionDetail();
 
         $keys = $this->_getObjectKeys($sectionList[0]);
@@ -92,7 +92,7 @@ class Dashboard extends Controller
         require APP . 'class/entity/section.php';
 
         # Creating course entity object
-        $sectionEntity = new SectionEntity();
+        $sectionEntity = new Section();
 
         # Getting current course information
         $sectionInfo = $sectionEntity->getSectionDetailByID($id);
@@ -113,9 +113,9 @@ class Dashboard extends Controller
      */
     public function session()
     {
-        require APP . 'class/entity/filesession.php';
-        $sessionEntity = new FilesessionEntity();
-        $sessionList = $sessionEntity->getSessionNoID();
+        require APP . 'class/entity/session.php';
+        $session = new Session();
+        $sessionList = $session->getSessionNoID();
 
         $keys = $this->_getObjectKeys($sessionList[0]);
 

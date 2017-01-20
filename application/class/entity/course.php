@@ -7,7 +7,7 @@
  * Date: 12/13/16
  * Time: 1:08 PM
  */
-class CourseEntity extends Entity
+class Course extends Entity
 {
     public function getCourse(){
         $sql = 'SELECT * FROM course';
