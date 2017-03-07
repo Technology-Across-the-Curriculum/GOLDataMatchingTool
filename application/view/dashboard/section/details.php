@@ -96,7 +96,7 @@
                                         foreach ($studentKeys as $key)
                                             echo '<th>' . $key . '</th>'
                                         ?>
-                                        <!--<th>Options</th>-->
+                                        <th>Options</th>
                                         </thead>
                                         <tbody>
 
@@ -109,14 +109,16 @@
                                                 } ?>
 
                                                 <!-- Options not needed for students at the time !-->
-                                                <!--<td>
-                                                    <a href="<?php /*echo URL; */?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */?>"
-                                                       class="btn btn-default">Select</a>
-                                                    <a href="<?php /*echo URL; */?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */?>"
+                                                <td>
+                                                    <div class="btn btn-default"
+                                                         id="btn-detail-<?php echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') ?>">
+                                                        Details
+                                                    </div>
+                                                    <!--<a href="<?php /*echo URL; */ ?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */ ?>"
                                                        class="btn btn-warning">Edit</a>
-                                                    <a href="<?php /*echo URL; */?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */?>"
-                                                       class="btn btn-danger">Delete</a>
-                                                </td>-->
+                                                    <a href="<?php /*echo URL; */ ?><?php /*echo htmlspecialchars($student->id, ENT_QUOTES, 'UTF-8') */ ?>"
+                                                       class="btn btn-danger">Delete</a>-->
+                                                </td>
                                             </tr>
                                         <?php } ?>
 
@@ -135,7 +137,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Session
+                            Session
                             <div class="pull-right">
                                 <a data-toggle="collapse" data-target="#wordsalad-summary-wrapper">
                                     <i class="fa fa-minus fa-fw"></i>
@@ -188,6 +190,36 @@
     </div>
     <!-- /#wrapper -->
 
+    <!-- modal !-->
+    <div id="student-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="student-data" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>first</th>
+                            <th>last</th>
+                            <th>lmsid</th>
+                            <th>email</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <!-- jQuery -->
     <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
 
@@ -212,7 +244,7 @@
             $('#classlist-table').DataTable();
         });
     </script>
-    <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
+    <script src="<?php echo URL; ?>public/js/dashboard-controls.js"></script>
 
 </body>
 
