@@ -46,7 +46,7 @@
                     <a href="<?php echo URL; ?>dashboard/section">Sections</a>
                 </li>
                 <li>
-                    <a href="<?php echo URL; ?>dashboard/session">sessions</a>
+                    <a href="<?php echo URL; ?>dashboard/session">Sessions</a>
                 </li>
             </ul>
         </div>
