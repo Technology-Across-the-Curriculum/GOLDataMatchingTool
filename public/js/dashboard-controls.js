@@ -4,6 +4,8 @@
 var studentModal = null;
 var btnDetail = 'btn-detail-';
 var dataTable = null;
+var mismatch = {};
+var row = null;
 
 $(function () {
 
@@ -44,13 +46,10 @@ $(function () {
         var id = this.id.replace(btnDetail, '');
         studentModal.modal('show');
         $.when(getStudentData(id)).done(function (json) {
-
             var data = JSON.parse(json);
-            console.log(data);
 
+            
             buildTable(data);
-
-
         })
     })
 });
@@ -76,12 +75,27 @@ function buildTable(data) {
         ]
     });
 
-    
+    $('#student-data tbody').on('click', 'tr', function (){
+        selectRow(this);
+    });
 
 }
 
 function emptyTable() {
     dataTable.destroy();
+}
+
+function selectRow(row){
+    if($(row).hasClass('alert-warning')){
+        $(row).removeClass('alert-warning');
+        mismatch[row.id] = "false";
+    }
+    else{
+        $(row).addClass('alert-warning');
+        mismatch[row.id] = "true";
+    }
+    console.log(mismatch);
+
 }
 
 
