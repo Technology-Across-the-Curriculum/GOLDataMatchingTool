@@ -208,6 +208,7 @@
                             <th>last</th>
                             <th>lmsid</th>
                             <th>email</th>
+                            <th>option</th>
                         </tr>
                         </thead>
                     </table>
