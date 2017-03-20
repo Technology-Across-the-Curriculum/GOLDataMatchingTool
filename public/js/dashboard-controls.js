@@ -112,8 +112,6 @@ function selectRow(btn, row) {
         $(btn).children('i').addClass('fa-times');
         mismatch['unmatch'][btn.id] = "true";
     }
-    console.log(mismatch);
-
 }
 
 /**
@@ -140,11 +138,38 @@ function saveMismatches() {
     })
         .done(function (json) {
             console.log(json);
+            var data = JSON.parse(json);
+            
+            dispalyResult(data['unmatch']);
+
+            clearMismatch();
+
 
         })
         .fail(function () {
 
         });
+}
+
+
+function dispalyResult(data){
+    for(var d in data){
+        var row = $('#' + d);
+        if(data[d] == 's'){
+            row.removeClass('alert-warning');
+            row.addClass('alert-success');
+
+        }
+        else{
+            row.removeClass('alert-warning');
+            row.addClass('alert-danger');
+        }
+
+    }
+}
+
+function clearMismatch(){
+    mismatch['unmatch'] = {};
 }
 
 
