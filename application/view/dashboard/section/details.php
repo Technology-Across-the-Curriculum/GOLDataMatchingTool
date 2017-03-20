@@ -215,7 +215,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="btn-modal-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="btn-modal-save" type="button" class="btn btn-primary">Save changes</button>
+                    <button id="btn-modal-save" type="button" class="btn btn-primary"  >Save changes</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

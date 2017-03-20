@@ -22,6 +22,11 @@ $(function () {
         emptyTable();
     });
 
+    $('#btn-modal-save').on('click',function(){
+        saveMismatches();
+        //emptyTable();
+    });
+
     // Onclick events for table Details button
     $('#classlist-table tbody').on('click', 'div.btn', function () {
 
@@ -37,6 +42,11 @@ $(function () {
     })
 });
 
+/**
+ * Gets all match records of selected student
+ * @param id
+ * @returns {*}
+ */
 function getStudentData(id) {
     return $.ajax({
         type: "get",
@@ -76,6 +86,8 @@ function buildTable(data) {
  */
 function emptyTable() {
     dataTable.destroy();
+    $('#student-data tbody').empty();
+
 }
 
 /**
@@ -100,11 +112,35 @@ function selectRow(btn, row){
 
 }
 
+/**
+ *  Adds a select button in to data object.
+ * @param data
+ * @returns {*}
+ */
 function addSelectBtn(data){
     for(var d in data){
         data[d]['option'] = '<div id="' + data[d].id + '" class="btn btn-default btn-sm"><i class="fa fa-circle-o" aria-hidden="true"></i></div>'
     }
     return data;
+}
+
+/**
+ *
+ */
+function saveMismatches(){
+    $.ajax({
+        type: "POST",
+        async: false,
+        data: mismatch,
+        url: url + 'matchapi/unmatch'
+    })
+        .done(function(json){
+            console.log(json);
+
+        })
+        .fail(function(){
+
+        });
 }
 
 
