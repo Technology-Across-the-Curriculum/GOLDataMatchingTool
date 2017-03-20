@@ -4,11 +4,15 @@
 var studentModal = null;
 var btnDetail = 'btn-detail-';
 var dataTable = null;
-var mismatch = {};
+var mismatch = {
+    'unmatch': {},
+    'sectionId': null
+};
 var row = null;
 
 $(function () {
 
+    mismatch['sectionId'] = sectionId;
     // Load modal and save the object
     studentModal = $('#student-modal').modal({'show': false});
 
@@ -22,7 +26,7 @@ $(function () {
         emptyTable();
     });
 
-    $('#btn-modal-save').on('click',function(){
+    $('#btn-modal-save').on('click', function () {
         saveMismatches();
         //emptyTable();
     });
@@ -73,9 +77,9 @@ function buildTable(data) {
         ]
     });
 
-    $('#student-data tbody').on('click', 'tr td div.btn ', function (){
+    $('#student-data tbody').on('click', 'tr td div.btn ', function () {
         console.log(this.id);
-        var row = $('#'+ this.id);
+        var row = $('#' + this.id);
         selectRow(this, row);
     });
 
@@ -95,18 +99,18 @@ function emptyTable() {
  *  Also addes/remove the row id from mustached list.
  * @param row
  */
-function selectRow(btn, row){
-    if($(row).hasClass('alert-warning')){
+function selectRow(btn, row) {
+    if ($(row).hasClass('alert-warning')) {
         $(row).removeClass('alert-warning');
         $(btn).children('i').removeClass('fa-times');
         $(btn).children('i').addClass('fa-circle-o');
-        mismatch[btn.id] = "false";
+        mismatch['unmatch'][btn.id] = "false";
     }
-    else{
+    else {
         $(row).addClass('alert-warning');
         $(btn).children('i').removeClass('fa-circle-o');
         $(btn).children('i').addClass('fa-times');
-        mismatch[btn.id] = "true";
+        mismatch['unmatch'][btn.id] = "true";
     }
     console.log(mismatch);
 
@@ -117,8 +121,8 @@ function selectRow(btn, row){
  * @param data
  * @returns {*}
  */
-function addSelectBtn(data){
-    for(var d in data){
+function addSelectBtn(data) {
+    for (var d in data) {
         data[d]['option'] = '<div id="' + data[d].id + '" class="btn btn-default btn-sm"><i class="fa fa-circle-o" aria-hidden="true"></i></div>'
     }
     return data;
@@ -127,18 +131,18 @@ function addSelectBtn(data){
 /**
  *
  */
-function saveMismatches(){
+function saveMismatches() {
     $.ajax({
         type: "POST",
         async: false,
         data: mismatch,
         url: url + 'matchapi/unmatch'
     })
-        .done(function(json){
+        .done(function (json) {
             console.log(json);
 
         })
-        .fail(function(){
+        .fail(function () {
 
         });
 }

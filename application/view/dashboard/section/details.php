@@ -240,6 +240,7 @@
     <!-- Custom Theme JavaScript -->
     <script>
         var url = '<?php echo URL; ?>';
+        var sectionId = '<?php echo $sectionID; ?>';
         $(document).ready(function () {
             $('#session-table').DataTable();
             $('#classlist-table').DataTable();

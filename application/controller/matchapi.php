@@ -44,7 +44,7 @@ class Matchapi extends Controller
         $participantKey = null;
 
         $participant = new Participant();
-        $participantList = $participant->getNonMatch($section_id);
+        $participantList = $participant->getUnmatchBySessionId($section_id);
         if(!empty($participantList)) {
             $participantKey = $this->_getObjectKeys($participantList[0]);
         }
@@ -75,15 +75,24 @@ class Matchapi extends Controller
     }
 
     public function unmatch(){
-        require APP . 'class/entity/session.php';
-        $session = new Session();
+        require APP . 'class/entity/participant.php';
+        $participant = new Participant();
         $data = $_POST;
-        foreach($data as $id => $confirm){
-            if($confirm){
 
+        // Get Darth Vaders id
+        $darthVader = $participant->getDarthVarderBySessionId($data['sectionId']);
+
+        foreach($data['unmatch'] as $id => $confirm){
+            if($confirm){
+                if($participant->unmatch($id, $darthVader->id)){
+                    $data['unmatch'][$id] = 's';
+                }
+                else{
+                    $data['unmatch'][$id] = 'f';
+                }
             }
         }
-        echo json_encode("Function call was a success");
+        echo json_encode($data);
     }
 
     public function deleteRecord(){

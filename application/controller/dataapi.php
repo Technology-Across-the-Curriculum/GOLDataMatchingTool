@@ -11,15 +11,13 @@ class Dataapi extends Controller
 {
 
 
-    public function getPaticipants($id){
-        require APP . 'class/entity/student.php';
-//        $course = new Course();
-//        $sections = $course->getCourseSection($id);'
-         $student = new Student();
-        $list = $student->getMatchParticipant($id);
+    public function getPaticipants($id)
+    {
+        require APP . 'class/entity/participant.php';
+        $participant = new Participant();
+        $list = $participant->getMatchByStudentId($id);
         echo json_encode($list);
     }
-
 
 
 }
