@@ -295,7 +295,6 @@ function getParticipant(section_id, session_id) {
         url: url + 'matchapi/getParticipant/' + section_id + '/' + session_id
     })
         .done(function (json) {
-            console.log(json);
             data = JSON.parse(json);
             // applying courses to dropdown
             var keys = data['keys'];
@@ -524,8 +523,15 @@ function saveMatches() {
                     }
                 }
 
+                // remove css from selected student
+                console.log(studentId);
+                $('#' + studentId + '-cl-row').removeClass('info');
+
                 // Resetting the participant match after success of action.
                 participantMatch = {};
+
+                // Resetting the Student Id
+                studentId = null;
 
             })
             .fail(function () {

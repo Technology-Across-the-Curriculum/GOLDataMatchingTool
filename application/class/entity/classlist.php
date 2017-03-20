@@ -18,7 +18,6 @@ class Classlist extends Entity
     }
 
 
-
     public function getClastlistByID($id)
     {
         $sql = 'SELECT * FROM classlist WHERE id = :id';
@@ -29,9 +28,3 @@ class Classlist extends Entity
     }
 
 }
-
-// Insert WordSalad score into *wordsalad_score table for the current database
-//$sql = 'insert into w365prod_wordsalad_score (nid, is_wordsalad, percent, score) values(:nid, :is_wordsalad, :percent, :score)';
-//$query = $this->db->prepare($sql);
-//$parameters = array(':nid' => $nodeData->node_id, ':is_wordsalad' => $nodeData->is_wordsalad, ':percent' => $nodeData->percent, ':score' => $nodeData->score);
-//$query->execute($parameters);

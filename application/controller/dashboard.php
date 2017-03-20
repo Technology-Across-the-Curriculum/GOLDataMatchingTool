@@ -92,14 +92,15 @@ class Dashboard extends Controller
         require APP . 'class/entity/section.php';
 
         # Creating course entity object
-        $sectionEntity = new Section();
+        $section = new Section();
 
         # Getting current course information
-        $sectionInfo = $sectionEntity->getSectionDetailByID($id);
-        $sessionList = $sectionEntity->getSectionSession($id);
+        $sectionID = $id;
+        $sectionInfo = $section->getSectionDetailByID($id);
+        $sessionList = $section->getSectionSession($id);
         $sessionKeys = $this->_getObjectKeys($sessionList[0]);
 
-        $studentList = $sectionEntity->getSectionClasslist($id);
+        $studentList = $section->getSectionClasslist($id);
         $studentKeys = $this->_getObjectKeys($studentList[0]);
 
         require APP . 'view/dashboard/section/details.php';

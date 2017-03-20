@@ -40,11 +40,11 @@ class Matchapi extends Controller
     }
 
     public function getParticipant($section_id){
-        require APP . 'class/entity/session.php';
+        require APP . 'class/entity/participant.php';
         $participantKey = null;
 
-        $session = new Session();
-        $participantList = $session->getParticipantNoMatch($section_id);
+        $participant = new Participant();
+        $participantList = $participant->getUnmatchBySessionId($section_id);
         if(!empty($participantList)) {
             $participantKey = $this->_getObjectKeys($participantList[0]);
         }
@@ -56,13 +56,13 @@ class Matchapi extends Controller
     }
 
     public function match(){
-        require APP . 'class/entity/session.php';
-        $session = new Session();
+        require APP . 'class/entity/participant.php';
+        $participant = new Participant();
         $data = $_POST;
 
         foreach($data['matches'] as $id => $confirm ){
             if($confirm){
-                if($session->updateMatchedParticipants($data['studentId'], $id)){
+                if($participant->match($data['studentId'], $id)){
                     $data['matches'][$id] = 's';
                 }
                 else{
@@ -74,14 +74,35 @@ class Matchapi extends Controller
         echo json_encode($data['matches']);
     }
 
+    public function unmatch(){
+        require APP . 'class/entity/participant.php';
+        $participant = new Participant();
+        $data = $_POST;
+
+        // Get Darth Vaders id
+        $darthVader = $participant->getDarthVarderBySessionId($data['sectionId']);
+
+        foreach($data['unmatch'] as $id => $confirm){
+            if($confirm){
+                if($participant->unmatch($id, $darthVader->id)){
+                    $data['unmatch'][$id] = 's';
+                }
+                else{
+                    $data['unmatch'][$id] = 'f';
+                }
+            }
+        }
+        echo json_encode($data);
+    }
+
     public function deleteRecord(){
-        require APP . 'class/entity/session.php';
-        $session = new Session();
+        require APP . 'class/entity/participant.php';
+        $participant = new Participant();
         $data = $_POST;
 
         foreach($data as $id => $confirm ){
             if($confirm){
-                if($session->deleteParticipant($id)){
+                if($participant->delete($id)){
                     $data[$id] = 's';
                 }
                 else{
