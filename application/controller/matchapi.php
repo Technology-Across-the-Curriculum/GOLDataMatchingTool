@@ -45,14 +45,14 @@ class Matchapi extends Controller
 
         $participant = new Participant();
         $participantList = $participant->getUnmatchBySessionId($section_id);
-        if(!empty($participantList)) {
+        /*if(!empty($participantList)) {
             $participantKey = $this->_getObjectKeys($participantList[0]);
         }
         else{
             $participantKey = "empty";
         }
-        $data = array('keys' =>$participantKey, 'list' => $participantList);
-        echo json_encode($data);
+        $data = array('keys' =>$participantKey, 'list' => $participantList);*/
+        echo json_encode($participantList);
     }
 
     public function match(){

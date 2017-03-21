@@ -30,7 +30,7 @@ $(document).ready(function () {
         sectionId = $(this).val();
         getClasslist(sectionId);
         getSession(sectionId);
-        getParticipant(sectionId);
+        getParticipantRefactored(sectionId);
 
         // When a student is selected higlight the row and save the id
         $("div.btn").click(function () {
@@ -43,20 +43,7 @@ $(document).ready(function () {
             }
         });
 
-        // Wiring Selected All button
-        $('#selectAll-btn').click(function () {
-            selectAllParticipants();
-        });
 
-        // Wiring Clear button
-        $('#clear-btn').click(function () {
-            clearAllParticipants();
-        });
-
-        // Wiring Delete button
-        $('#delete-btn').click(function () {
-            deleteSelected();
-        });
     });
 
     // Wiring Save button
@@ -132,12 +119,12 @@ function getSection(id) {
             // remove section when a new crouse is selected.
             if (numChildren > 1) {
 
-                for ( i = 1; i < numChildren; i++) {
+                for (i = 1; i < numChildren; i++) {
                     listChildren[i].remove();
                 }
             }
 
-            for ( i = 0; i < data.length; i++) {
+            for (i = 0; i < data.length; i++) {
                 courseDropdown.append('<option value="' + data[i].id + '">' + data[i].crn + ' ' + data[i].code + '</option>');
             }
 
@@ -178,12 +165,12 @@ function getSession(id) {
             // remove section when a new crouse is selected.
             if (numChildren > 1) {
 
-                for ( i = 1; i < numChildren; i++) {
+                for (i = 1; i < numChildren; i++) {
                     listChildren[i].remove();
                 }
             }
 
-            for ( i = 0; i < data.length; i++) {
+            for (i = 0; i < data.length; i++) {
                 courseDropdown.append('<option value="' + data[i].id + '">' + data[i].date_created + '</option>');
             }
 
@@ -356,30 +343,26 @@ function getParticipant(section_id, session_id) {
 
                 // adding Custom tool bar
                 var toolbar = $("div.toolbar");
-                var buttons = $('<div>',{id:"button-toolbar", class:"col-lg-4"});
-                var legend  = $('<div>',{id:"legend-toolbar", class:"col-lg-8"});
+                var buttons = $('<div>', {id: "button-toolbar", class: "col-lg-4"});
+                var legend = $('<div>', {id: "legend-toolbar", class: "col-lg-8"});
                 var selectAllBtn = $('<div>', {id: 'selectAll-btn', class: "btn btn-primary", text: "Select All"});
                 var clearBtn = $('<div>', {id: 'clear-btn', class: 'btn btn-warning', text: 'Clear'});
                 var deleteBtn = $('<div>', {id: 'delete-btn', class: 'btn btn-danger', text: 'Delete Selected'});
-                var selectedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
-                    $('<span>', {class:"fa fa-square fa-2x key-color key-info"}),
-                    $('<span>',{class:"key-text", text:"Selected"})
-
+                var selectedKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
+                    $('<span>', {class: "fa fa-square fa-2x key-color key-info"}),
+                    $('<span>', {class: "key-text", text: "Selected"})
                 );
-                var deletedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
-                    $('<span>', {class:"fa fa-square fa-2x key-color key-error"}),
-                    $('<span>',{class:"key-text", text:"Delete Success"})
-
+                var deletedKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
+                    $('<span>', {class: "fa fa-square fa-2x key-color key-error"}),
+                    $('<span>', {class: "key-text", text: "Delete Success"})
                 );
-                var matchedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
-                    $('<span>', {class:"fa fa-square fa-2x key-color key-success"}),
-                    $('<span>',{class:"key-text", text:"Match Success"})
-
+                var matchedKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
+                    $('<span>', {class: "fa fa-square fa-2x key-color key-success"}),
+                    $('<span>', {class: "key-text", text: "Match Success"})
                 );
-                var errorKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
-                    $('<span>', {class:"fa fa-square fa-2x key-color key-warning"}),
-                    $('<span>',{class:"key-text", text:"error"})
-
+                var errorKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
+                    $('<span>', {class: "fa fa-square fa-2x key-color key-warning"}),
+                    $('<span>', {class: "key-text", text: "error"})
                 );
 
                 // append buttons to buttons bar
@@ -406,6 +389,131 @@ function getParticipant(section_id, session_id) {
         .fail(function () {
             console.log('matchapi/getSection' + id + ' : failed')
         });
+}
+
+function getParticipantRefactored(section_id, session_id) {
+    var data = null; // hold data to be returned
+    var table = $("#participant-table");
+
+    // Makes an ajax call to backfillapi/fillNode
+    // returns stats of filled node
+    $.ajax({
+        type: "get",
+        async: false,
+        url: url + 'matchapi/getParticipant/' + section_id + '/' + session_id
+    })
+        .done(function (json) {
+            // parse json
+            data = JSON.parse(json);
+
+            // Adds options to each participant in list
+            data = addParticipantOption(data);
+
+            // show table
+            table.removeClass('hidden');
+
+            // Setting DataTables Options
+            table.dataTable({
+                scrollY: 200,
+                destroy: true,
+                bPaginate: false,
+                stripeClasses: [],
+                data: data,
+                "dom": '<"toolbar row">frtip',
+                "columns": [
+                    {"data": "id"},
+                    {"data": "first"},
+                    {"data": "last"},
+                    {"data": "lmsid"},
+                    {"data": "email"},
+                    {"data": "option"}
+                ]
+
+
+            });
+
+            // adding legend and buttons
+            $("div.toolbar").append(participantToolButtons(), participantToolLegends());
+
+            //
+            $('div[id*="-participant"]').on("click",function(){
+                var id = this.id.split('-')[0];
+                console.log(id);
+                selectParticipant(id);
+            });
+
+            // Wiring Selected All button
+            $('#selectAll-btn').click(function () {
+                selectAllParticipants();
+            });
+
+            // Wiring Clear button
+            $('#clear-btn').click(function () {
+                clearAllParticipants();
+            });
+
+            // Wiring Delete button
+            $('#delete-btn').click(function () {
+                deleteSelected();
+            });
+
+
+        })
+        .fail(function () {
+            console.log('matchapi/getSection' + id + ' : failed')
+        });
+}
+function addParticipantOption(participantList){
+    for(var p in participantList){
+        participantList[p]['option'] = participantSelectBtn(participantList[p]['id']);
+    }
+    return participantList;
+}
+
+function participantSelectBtn(id){
+    return '<div id="' + id + '-participant" class="btn btn-warning">Select</div>'
+}
+
+function participantToolButtons() {
+    var buttons = $('<div>',{id:"button-toolbar", class:"col-md-6"});
+    var selectAllBtn = $('<div>', {id: 'selectAll-btn', class: "btn btn-primary", text: "Select All"});
+    var clearBtn = $('<div>', {id: 'clear-btn', class: 'btn btn-warning', text: 'Clear'});
+    var deleteBtn = $('<div>', {id: 'delete-btn', class: 'btn btn-danger', text: 'Delete Selected'});
+
+    // append buttons
+    buttons.append(selectAllBtn, clearBtn, deleteBtn);
+    console.log(buttons);
+    return buttons;
+
+}
+
+function participantToolLegends(){
+    var legend  = $('<div>',{id:"legend-toolbar", class:"col-md-6"});
+
+    var selectedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+        $('<span>', {class:"fa fa-square fa-2x key-color key-info"}),
+        $('<span>',{class:"key-text", text:"Selected"})
+
+    );
+    var matchedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+        $('<span>', {class:"fa fa-square fa-2x key-color key-success"}),
+        $('<span>',{class:"key-text", text:"Match Success"})
+
+    );
+    var deletedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+        $('<span>', {class:"fa fa-square fa-2x key-color key-error"}),
+        $('<span>',{class:"key-text", text:"Delete Success"})
+
+    );
+
+    var errorKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
+        $('<span>', {class:"fa fa-square fa-2x key-color key-warning"}),
+        $('<span>',{class:"key-text", text:"error"})
+
+    );
+    legend.append(selectedKey, matchedKey, deletedKey, errorKey);
+    console.log(legend.innerHTML);
+    return legend;
 }
 
 /**
@@ -471,6 +579,65 @@ function clearAllParticipants() {
         $("#" + key + "-pl-row").removeClass('info');
         delete participantMatch[key];
     }
+}
+
+/**
+ * Description:
+ * Parameters:
+ * Returns:
+ */
+function deleteSelected() {
+    var participant = true;
+    $('#error-message').empty();
+
+
+    // check if there are participant selected.
+    if ($.isEmptyObject(participantMatch)) {
+        $('#error-message').append(
+            $('<div>', {text: "Please select a participant(s) to delete.", class: 'col-lg-12 alert alert-warning '})
+        );
+        participant = false;
+    }
+
+    if (participant) {
+        var data = participantMatch;
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: data,
+            url: url + 'matchapi/deleteRecord'
+        })
+            .done(function (json) {
+                var data = JSON.parse(json);
+                console.log(data);
+
+                // remove successfull match from table
+                for (var key in data) {
+                    if (data[key] == 's') {
+                        $('#' + key + '-pl-row div.btn').remove();
+                        $('#' + key + '-pl-row').removeClass('info');
+                        $('#' + key + '-pl-row').addClass('danger');
+                    }
+                    else {
+                        console.log(data[key]);
+                        $('#' + key + '-pl-row').removeClass('info');
+                        $('#' + key + '-pl-row').addClass('warning');
+                    }
+                }
+                console.log(participantMatch);
+
+                // Resetting participantMatch after success of action.
+                participantMatch = {};
+
+            })
+            .fail(function () {
+            })
+
+    }
+    else {
+        console.log("data not saved");
+    }
+
 }
 
 /**
@@ -544,63 +711,6 @@ function saveMatches() {
 }
 
 
-/**
- * Description:
- * Parameters:
- * Returns:
- */
-function deleteSelected() {
-    var participant = true;
-    $('#error-message').empty();
 
-
-    // check if there are participant selected.
-    if ($.isEmptyObject(participantMatch)) {
-        $('#error-message').append(
-            $('<div>', {text: "Please select a participant(s) to delete.", class: 'col-lg-12 alert alert-warning '})
-        );
-        participant = false;
-    }
-
-    if (participant) {
-        var data = participantMatch;
-        $.ajax({
-            type: "POST",
-            async: false,
-            data: data,
-            url: url + 'matchapi/deleteRecord'
-        })
-            .done(function (json) {
-                var data = JSON.parse(json);
-                console.log(data);
-
-                // remove successfull match from table
-                for (var key in data) {
-                    if (data[key] == 's') {
-                        $('#' + key + '-pl-row div.btn').remove();
-                        $('#' + key + '-pl-row').removeClass('info');
-                        $('#' + key + '-pl-row').addClass('danger');
-                    }
-                    else {
-                        console.log(data[key]);
-                        $('#' + key + '-pl-row').removeClass('info');
-                        $('#' + key + '-pl-row').addClass('warning');
-                    }
-                }
-                console.log(participantMatch);
-
-                // Resetting participantMatch after success of action.
-                participantMatch = {};
-
-            })
-            .fail(function () {
-            })
-
-    }
-    else {
-        console.log("data not saved");
-    }
-
-}
 
 

@@ -12,8 +12,8 @@ class Participant extends Entity
     {
         $sql = 'SELECT
   pl.id,
-  pl.first_name AS "First",
-  pl.last_name  AS "Last",
+  pl.first_name AS "first",
+  pl.last_name  AS "last",
   pl.lmsid,
   pl.email
 FROM participant_list pl

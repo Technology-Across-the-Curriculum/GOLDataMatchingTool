@@ -99,17 +99,6 @@
 
                     </div>
                 </div>
-
-                <!-- session selection !-->
-                <!--<div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="session"><h4>Select Session:</h4></label>
-                        <select class="form-control" id="session">
-                            <option value='0' selected="selected">None</option>
-                        </select>
-
-                    </div>
-                </div>-->
             </div>
 
             <!-- Classlist Panel !-->
@@ -128,6 +117,18 @@
                         <!-- /.panel-heading -->
                         <div id="classlist-wrapper" class="panel-collapse collapse in">
                             <div class="panel-body classlist-info" id="classlist-table-wrapper">
+                                <!--<table id="classlist-table" class="display" cellpadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>first</th>
+                                        <th>last</th>
+                                        <th>email</th>
+                                        <th>lmsid</th>
+                                        <th>options</th>
+                                    </tr>
+                                    </thead>
+                                </table>-->
 
                             </div>
                             <!-- /.panel-body !-->
@@ -154,7 +155,18 @@
                         <div id="participant-wrapper" class="panel-collapse collapse in">
                             <!--<div class="btn btn-info" id="select-all"> Select All</div>-->
                             <div class="panel-body participant-info" id="participant-table-wrapper">
-
+                                <table id="participant-table" class="table display hidden" cellpadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>first</th>
+                                        <th>last</th>
+                                        <th>email</th>
+                                        <th>lmsid</th>
+                                        <th>option</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
 
                             <!-- /.panel-body !-->
