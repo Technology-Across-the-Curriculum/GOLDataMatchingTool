@@ -14,8 +14,8 @@ class Participant extends Entity
   pl.id,
   pl.first_name AS "first",
   pl.last_name  AS "last",
-  pl.lmsid,
-  pl.email
+  pl.email,
+  pl.lmsid
 FROM participant_list pl
 where pl.classlist_id = (
   SELECT cl.id from classlist cl

@@ -51,4 +51,5 @@ fabric.properties
 .idea/
 public/libs/
 application/config/
+sftp-config.json
 

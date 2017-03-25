@@ -32,10 +32,10 @@ class Matchapi extends Controller
 
     public function getClasslist($id){
         require APP . 'class/entity/section.php';
-        $session = new Section();
-        $studentList = $session->getCensoredClassList($id);
-        $studentKeys = $this->_getObjectKeys($studentList[0]);
-        $data = array('keys' =>$studentKeys, 'list' => $studentList);
+        $section = new Section();
+        $studentList = $section->getCensoredClassList($id);
+        //$studentKeys = $this->_getObjectKeys($studentList[0]);
+        $data = $studentList;
         echo json_encode($data);
     }
 

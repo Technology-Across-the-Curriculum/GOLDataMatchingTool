@@ -28,20 +28,20 @@ $(document).ready(function () {
     // get the class list
     $("#sections").change(function () {
         sectionId = $(this).val();
-        getClasslist(sectionId);
+        getClasslistRefactored(sectionId);
         getSession(sectionId);
         getParticipantRefactored(sectionId);
 
         // When a student is selected higlight the row and save the id
-        $("div.btn").click(function () {
-            pid = $(this).attr('id').split('-');
-            if (pid[1] == 'participant') {
-                selectParticipant(pid[0]);
-            }
-            if (pid[1] == 'student') {
-                selectStudent(pid[0]);
-            }
-        });
+        // $("div.btn").click(function () {
+        //     pid = $(this).attr('id').split('-');
+        //     if (pid[1] == 'participant') {
+        //         selectParticipant(pid[0]);
+        //     }
+        //     if (pid[1] == 'student') {
+        //         selectStudent(pid[0]);
+        //     }
+        // });
 
 
     });
@@ -77,8 +77,7 @@ function getCourses() {
             data = JSON.parse(json);
 
             // applying courses to dropdown
-            var courseDropdown = $('#courses');
-            for (var i = 0; i < data.length; i++) {
+            var courseDropdown = $('#courses');            for (var i = 0; i < data.length; i++) {
                 courseDropdown.append('<option value="' + data[i].id + '">' + data[i].acronym + '</option>');
             }
 
@@ -262,6 +261,65 @@ function getClasslist(id) {
         });
 }
 
+function getClasslistRefactored(id) {
+    var data = null; // hold data to be returned
+    var table = $("#classlist-table");
+
+    // Makes an ajax call to backfillapi/fillNode
+    // returns stats of filled node
+    $.ajax({
+        type: "get",
+        async: false,
+        url: url + 'matchapi/getClasslist/' + id
+    })
+        .done(function (json) {
+            console.log(json);
+            data = JSON.parse(json);
+            data = modifyClassList(data);
+
+            
+            // show table
+            table.removeClass('hidden');
+
+            // Setting DataTables Options
+            table.dataTable({
+                scrollY: 200,
+                destroy: true,
+                bPaginate: false,
+                stripeClasses: [],
+                data: data,
+                "columns": [
+                    {"data": "id"},
+                    {"data": "first"},
+                    {"data": "last"},
+                    {"data": "email"},
+                    {"data": "sid"},
+                    {"data": "option"}
+                ]
+                });
+
+
+                //
+            $('div[id*="-classlist"]').on("click",function(){
+                var id = this.id.split('-')[0];
+                selectStudent(id);
+            });
+
+            
+        })
+        .fail(function () {
+            console.log('matchapi/getSection' + id + ' : failed')
+        });
+}
+
+function modifyClassList(classlist){
+    for(var c in classlist){
+        classlist[c]['option'] = SelectBtn(classlist[c]['id'], 'classlist');
+        classlist[c]['DT_RowId'] =  classlist[c]['id'] + '-cl-row';
+    }
+    return classlist;
+}
+
 /**
  * Description:
  *  Makes an Ajax call to matchapi function getClasslist and returns the classlist for a givien section and
@@ -407,7 +465,7 @@ function getParticipantRefactored(section_id, session_id) {
             data = JSON.parse(json);
 
             // Adds options to each participant in list
-            data = addParticipantOption(data);
+            data = modifyParticipantList(data);
 
             // show table
             table.removeClass('hidden');
@@ -424,8 +482,8 @@ function getParticipantRefactored(section_id, session_id) {
                     {"data": "id"},
                     {"data": "first"},
                     {"data": "last"},
-                    {"data": "lmsid"},
                     {"data": "email"},
+                    {"data": "lmsid"},
                     {"data": "option"}
                 ]
 
@@ -438,7 +496,6 @@ function getParticipantRefactored(section_id, session_id) {
             //
             $('div[id*="-participant"]').on("click",function(){
                 var id = this.id.split('-')[0];
-                console.log(id);
                 selectParticipant(id);
             });
 
@@ -463,17 +520,32 @@ function getParticipantRefactored(section_id, session_id) {
             console.log('matchapi/getSection' + id + ' : failed')
         });
 }
-function addParticipantOption(participantList){
+/**
+ * Add options buttons to each participant object for user in datatables
+ * @param {[type]} participantList [description]
+ */
+function modifyParticipantList(participantList){
     for(var p in participantList){
-        participantList[p]['option'] = participantSelectBtn(participantList[p]['id']);
+        participantList[p]['option'] = SelectBtn(participantList[p]['id'], 'participant');
+        participantList[p]['DT_RowId'] =  participantList[p]['id'] + '-pl-row';
     }
     return participantList;
 }
 
-function participantSelectBtn(id){
-    return '<div id="' + id + '-participant" class="btn btn-warning">Select</div>'
+
+/**
+ * Creates select button id for participant in database 
+ * @param  {[type]} id [description]
+ * @return {[type]}    [description]
+ */
+function SelectBtn(id, identifier){
+    return '<div id="' + id + '-' + identifier + '" class="btn btn-warning">Select</div>'
 }
 
+/**
+ * Creates action buttons of for participant table
+ * @return {[type]} [description]
+ */
 function participantToolButtons() {
     var buttons = $('<div>',{id:"button-toolbar", class:"col-md-6"});
     var selectAllBtn = $('<div>', {id: 'selectAll-btn', class: "btn btn-primary", text: "Select All"});
@@ -482,11 +554,14 @@ function participantToolButtons() {
 
     // append buttons
     buttons.append(selectAllBtn, clearBtn, deleteBtn);
-    console.log(buttons);
     return buttons;
 
 }
 
+/**
+ * Creates a legend for participant table
+ * @return {[type]} [description]
+ */
 function participantToolLegends(){
     var legend  = $('<div>',{id:"legend-toolbar", class:"col-md-6"});
 
@@ -512,7 +587,6 @@ function participantToolLegends(){
 
     );
     legend.append(selectedKey, matchedKey, deletedKey, errorKey);
-    console.log(legend.innerHTML);
     return legend;
 }
 
@@ -609,7 +683,6 @@ function deleteSelected() {
         })
             .done(function (json) {
                 var data = JSON.parse(json);
-                console.log(data);
 
                 // remove successfull match from table
                 for (var key in data) {
@@ -619,12 +692,10 @@ function deleteSelected() {
                         $('#' + key + '-pl-row').addClass('danger');
                     }
                     else {
-                        console.log(data[key]);
                         $('#' + key + '-pl-row').removeClass('info');
                         $('#' + key + '-pl-row').addClass('warning');
                     }
                 }
-                console.log(participantMatch);
 
                 // Resetting participantMatch after success of action.
                 participantMatch = {};
@@ -691,7 +762,6 @@ function saveMatches() {
                 }
 
                 // remove css from selected student
-                console.log(studentId);
                 $('#' + studentId + '-cl-row').removeClass('info');
 
                 // Resetting the participant match after success of action.
