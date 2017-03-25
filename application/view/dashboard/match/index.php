@@ -99,17 +99,6 @@
 
                     </div>
                 </div>
-
-                <!-- session selection !-->
-                <!--<div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="session"><h4>Select Session:</h4></label>
-                        <select class="form-control" id="session">
-                            <option value='0' selected="selected">None</option>
-                        </select>
-
-                    </div>
-                </div>-->
             </div>
 
             <!-- Classlist Panel !-->
@@ -128,6 +117,18 @@
                         <!-- /.panel-heading -->
                         <div id="classlist-wrapper" class="panel-collapse collapse in">
                             <div class="panel-body classlist-info" id="classlist-table-wrapper">
+                                <table id="classlist-table" class="table display hidden" cellpadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>First</th>
+                                        <th>Last</th>
+                                        <th>Email</th>
+                                        <th>SID</th>
+                                        <th>Option</th>
+                                    </tr>
+                                    </thead>
+                                </table>
 
                             </div>
                             <!-- /.panel-body !-->
@@ -142,7 +143,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-list fa-fw"></i> Participant
+                            <i class="fa fa-list fa-fw"></i>Participant
                             <div class="pull-right">
                                 <a data-toggle="collapse" data-target="#participant-wrapper">
                                     <i class="fa fa-minus fa-fw"></i>
@@ -154,7 +155,18 @@
                         <div id="participant-wrapper" class="panel-collapse collapse in">
                             <!--<div class="btn btn-info" id="select-all"> Select All</div>-->
                             <div class="panel-body participant-info" id="participant-table-wrapper">
-
+                                <table id="participant-table" class="table display hidden" cellpadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>First</th>
+                                        <th>Last</th>
+                                        <th>Email</th>
+                                        <th>LMSID</th>
+                                        <th>Option</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
 
                             <!-- /.panel-body !-->

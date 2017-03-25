@@ -57,10 +57,11 @@ INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
     {
         $sql = "SELECT 
                   id, 
-                  student_id as 'SID',
-                  first_name as 'Frist',  
-                  last_name as 'Last',
-                  email                  
+                  
+                  first_name as 'first',  
+                  last_name as 'last',
+                  email,
+                  student_id as 'sid'     
                 FROM classlist 
                 WHERE section_id = :id";
         $query = $this->db->prepare($sql);

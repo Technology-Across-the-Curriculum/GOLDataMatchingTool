@@ -12,10 +12,10 @@ class Participant extends Entity
     {
         $sql = 'SELECT
   pl.id,
-  pl.first_name AS "First",
-  pl.last_name  AS "Last",
-  pl.lmsid,
-  pl.email
+  pl.first_name AS "first",
+  pl.last_name  AS "last",
+  pl.email,
+  pl.lmsid
 FROM participant_list pl
 where pl.classlist_id = (
   SELECT cl.id from classlist cl
