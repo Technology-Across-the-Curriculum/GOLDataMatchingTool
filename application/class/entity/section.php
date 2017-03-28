@@ -36,6 +36,14 @@ INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
+    public function getSectionByCourseId($id){
+        $sql = 'SELECT * FROM section WHERE course_id = :id';
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id'=> $id);
+        $query->execute($parameters);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function getSectionSession($id)
     {
         $sql = 'SELECT * FROM session WHERE section_id = :id';
@@ -72,9 +80,3 @@ INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
 
 
 }
-
-// Insert WordSalad score into *wordsalad_score table for the current database
-//$sql = 'insert into w365prod_wordsalad_score (nid, is_wordsalad, percent, score) values(:nid, :is_wordsalad, :percent, :score)';
-//$query = $this->db->prepare($sql);
-//$parameters = array(':nid' => $nodeData->node_id, ':is_wordsalad' => $nodeData->is_wordsalad, ':percent' => $nodeData->percent, ':score' => $nodeData->score);
-//$query->execute($parameters);

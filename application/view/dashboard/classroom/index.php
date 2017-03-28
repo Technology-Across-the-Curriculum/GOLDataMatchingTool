@@ -36,6 +36,8 @@
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Custom CSS !-->
+    <link href="<?php echo URL; ?>css/master.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -67,36 +69,15 @@
             <!-- List Courses -->
             <div class="row">
                 <div class="col-lg-12">
-                    <table id="section-table" class="table">
-                        <thead>
-                        <?php
-                        foreach ($keys as $key)
-                            echo '<th>' . $key . '</th>'
-                        ?>
-                        <th>Options</th>
-                        </thead>
-                        <tbody>
-
-                        <?php
-                        foreach ($classroomList as $classroom) {
-                            ?>
-                            <tr>
-                                <?php foreach ($classroom as $key => $value) {
-                                    echo '<td>' . $value . '</td>';
-                                } ?>
-                                <td>
-                                    <a href="<?php echo URL; ?>dashboard/classroomDetail/<?php echo htmlspecialchars($classroom->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>dashboard/classroomEdit/<?php echo htmlspecialchars($classroom->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>dashboard/classroomDelete/<?php echo htmlspecialchars($classroom->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-danger">Delete</a>
-                                </td>
+                    <table id="classtoom-table" class="table">
+                       <thead>
+                           <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Otpions</th>
                             </tr>
-                        <?php } ?>
+                       </thead>
 
-
-                        </tbody>
                     </table>
                 </div>
 
@@ -124,8 +105,30 @@
         <!-- Custom Theme JavaScript -->
         <script>
             var url = '<?php echo URL; ?>';
+            var data = JSON.parse('<?php echo $classroomList; ?>');
             $(document).ready(function () {
-                $('#section-table').DataTable();
+                for(var d in data){
+                    data[d]['options'] = '<a href="'+ url + 'dashboard/classroomDetail/' + data[d]['id'] + '"class="btn btn-default">Select</a>'
+                                        + '<a href="'+ url + 'dashboard/classroomEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
+                                        + '<a href="'+ url + 'dashboard/classroomDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
+            
+                }
+
+                $('#classtoom-table').dataTable({
+    
+                destroy: true,
+                bPaginate: false,
+                stripeClasses: [],
+                data: data,
+                "columns": [
+                        {"data": "id"},
+                        {"data": "name"},
+                        {"data": "options"}
+                    ]
+                });
+
+
+
             });
         </script>
         <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>

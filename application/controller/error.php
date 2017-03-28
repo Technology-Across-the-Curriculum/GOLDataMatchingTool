@@ -16,6 +16,7 @@ class error extends Controller
      */
     public function index()
     {
+
         // load views
         require APP . 'view/error/index.php';
     }

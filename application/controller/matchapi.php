@@ -17,9 +17,9 @@ class Matchapi extends Controller
     }
 
     public function getSection($id){
-        require APP . 'class/entity/course.php';
-        $course = new Course();
-        $sections = $course->getCourseSection($id);
+        require APP . 'class/entity/section.php';
+        $section = new Section();
+        $sections = $section->getSectionByCourseId($id);
         echo json_encode($sections);
     }
 

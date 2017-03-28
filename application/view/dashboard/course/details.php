@@ -36,6 +36,9 @@
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Custom CSS !-->
+    <link href="<?php echo URL; ?>css/master.css" rel="stylesheet" type="text/css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -68,35 +71,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     <table id="section-table" class="table">
-                        <thead>
-                        <?php
-                        foreach ($keys as $key)
-                            echo '<th>' . $key . '</th>'
-                        ?>
-                        <th>Options</th>
-                        </thead>
-                        <tbody>
-
-                        <?php
-                        foreach ($sectionList as $section) {
-                            ?>
-                            <tr>
-                                <?php foreach ($section as $key => $value) {
-                                    echo '<td>' . $value . '</td>';
-                                } ?>
-                                <td>
-                                    <a href="<?php echo URL; ?>dashboard/sectionDetail/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>dashboard/sectionEdit/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>dashboard/sectionDelete/<?php echo htmlspecialchars($section->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-
-
-                        </tbody>
+                    <thead>
+                           <tr>
+                                <th>Id</th>
+                                <th>Course Id</th>
+                                <th>Classroom Id</th>
+                                <th>CRN</th>
+                                <th>Term Code</th>
+                                <th>Alt Term Code</th>
+                                <th>Code</th>
+                                <th>Options</th>
+                           </tr>
+                       </thead>
                     </table>
                 </div>
             </div>
@@ -122,11 +108,38 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
-        var url = '<?php echo URL; ?>';
-        $(document).ready(function () {
-            $('#section-table').DataTable();
-        });
-    </script>
+            var url = '<?php echo URL; ?>';
+            var data = JSON.parse('<?php echo $sectionList; ?>');
+            $(document).ready(function () {
+                for(var d in data){
+                    data[d]['options'] = '<a href="'+ url + 'dashboard/sectionDetail/' + data[d]['id'] + '"class="btn btn-default">Select</a>'
+                                        + '<a href="'+ url + 'dashboard/sectionEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
+                                        + '<a href="'+ url + 'dashboard/sectionDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
+            
+                }
+
+                $('#section-table').dataTable({
+                scrollY: 200,
+                destroy: true,
+                bPaginate: false,
+                stripeClasses: [],
+                data: data,
+                "columns": [
+                        {"data": "id"},
+                        {"data": "course_id"},
+                        {"data": "classroom_id"},
+                        {"data": "crn"},
+                        {"data": "term_code"},
+                        {"data": "alt_term_code"},
+                        {"data": "code"},
+                        {"data": "options"}
+                    ]
+                });
+
+
+
+            });
+        </script>
     <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
 
 </body>
