@@ -112,9 +112,7 @@ class Dashboard extends Controller
     {
         require APP . 'class/entity/session.php';
         $session = new Session();
-        $sessionList = $session->getSessionNoID();
-
-        $keys = $this->_getObjectKeys($sessionList[0]);
+        $sessionList = json_encode($session->getSessionNoID());
 
         require APP . 'view/dashboard/session/index.php';
     }

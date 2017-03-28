@@ -1,89 +1,89 @@
-<?php
-/**
- * Created by Nathan Healea.
- * Project: MineDash
- * File: dashboard-base.php
- * Date: 7/14/16
- * Time: 9:09 AM
- */
-?>
-<!DOCTYPE html>
-<html lang="en">
+    <?php
+    /**
+     * Created by Nathan Healea.
+     * Project: MineDash
+     * File: dashboard-base.php
+     * Date: 7/14/16
+     * Time: 9:09 AM
+     */
+    ?>
+    <html lang="en">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title><?php echo APP_NAME; ?></title>
+        <title><?php echo APP_NAME; ?></title>
 
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
+        <!-- Bootstrap 3.3.5 -->
+        <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
 
-    <!-- Bootstrap Admin CSS -->
-    <link href="<?php echo URL; ?>libs/bootstrap-admin/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+        <!-- Bootstrap Admin CSS -->
+        <link href="<?php echo URL; ?>libs/bootstrap-admin/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
 
-    <!-- MetisMenu CSS -->
-    <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
+        <!-- MetisMenu CSS -->
+        <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
-    <!-- DataTables CSS -->
-    <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
-          type="text/css">
+        <!-- DataTables CSS -->
+        <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
+        type="text/css">
 
-    <!-- Custom Fonts -->
-    <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+        <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Custom CSS !-->
-    <link href="<?php echo URL; ?>css/master.css" rel="stylesheet" type="text/css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- Custom CSS !-->
+        <link href="<?php echo URL; ?>css/master.css" rel="stylesheet" type="text/css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-<div id="wrapper">
+        <div id="wrapper">
 
-    <!-- Navigation -->
-    <?php require TEMP . 'dashboard/navigation.php'; ?>
+            <!-- Navigation -->
+            <?php require TEMP . 'dashboard/navigation.php'; ?>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
+            <!-- Page Content -->
+            <div id="page-wrapper">
+                <div class="container-fluid">
 
-            <!-- Page Header -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Classrooms</h1>
+                    <!-- Page Header -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Classrooms</h1>
+                        </div>
+
+                    </div>
+
+                    <!-- List Courses -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table id="classtoom-table" class="table">
+                             <thead>
+                                 <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Otpions</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+
                 </div>
 
             </div>
-
-            <!-- List Courses -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <table id="classtoom-table" class="table">
-                       <thead>
-                           <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Otpions</th>
-                            </tr>
-                       </thead>
-
-                    </table>
-                </div>
-
-            </div>
-
-        </div>
+        </div>  
         <!-- /#wrapper -->
 
         <!-- jQuery -->
@@ -109,21 +109,21 @@
             $(document).ready(function () {
                 for(var d in data){
                     data[d]['options'] = '<a href="'+ url + 'dashboard/classroomDetail/' + data[d]['id'] + '"class="btn btn-default">Select</a>'
-                                        + '<a href="'+ url + 'dashboard/classroomEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
-                                        + '<a href="'+ url + 'dashboard/classroomDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
-            
+                    + '<a href="'+ url + 'dashboard/classroomEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
+                    + '<a href="'+ url + 'dashboard/classroomDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
+
                 }
 
                 $('#classtoom-table').dataTable({
-    
-                destroy: true,
-                bPaginate: false,
-                stripeClasses: [],
-                data: data,
-                "columns": [
-                        {"data": "id"},
-                        {"data": "name"},
-                        {"data": "options"}
+                    scrollY: 650,
+                    destroy: true,
+                    bPaginate: false,
+                    stripeClasses: [],
+                    data: data,
+                    "columns": [
+                    {"data": "id"},
+                    {"data": "name"},
+                    {"data": "options"}
                     ]
                 });
 
@@ -133,6 +133,6 @@
         </script>
         <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
 
-</body>
+    </body>
 
-</html>
+    </html>

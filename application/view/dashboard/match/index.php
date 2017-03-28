@@ -31,7 +31,7 @@
 
     <!-- DataTables CSS -->
     <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
-          type="text/css">
+    type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -48,137 +48,137 @@
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <!-- Navigation -->
-    <?php require TEMP . 'dashboard/navigation.php'; ?>
+        <!-- Navigation -->
+        <?php require TEMP . 'dashboard/navigation.php'; ?>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
 
-            <!-- Page Header -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Matching Tool</h1>
-                </div>
-            </div>
-
-            <!-- Error messages !-->
-            <div id="error-message" class="row">
-            </div>
-
-
-            <!-- Course and Section selection !-->
-            <div class="row">
-
-                <!-- Save Buttom !-->
-                <div class="col-lg-4">
-                    <h4>Save Changes:</h4>
-                    <div id="save-btn" class="col-lg-4 btn btn-success">Save</div>
-                </div>
-
-
-                <!-- course selection !-->
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="courses"><h4>Select Course:</h4></label>
-                        <select class="form-control" id="courses">
-                            <option value='0' selected="selected">None</option>
-                        </select>
+                <!-- Page Header -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Matching Tool</h1>
                     </div>
                 </div>
 
-                <!-- section selection !-->
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="sections"><h4>Select Section:</h4></label>
-                        <select class="form-control" id="sections">
-                            <option value='0' selected="selected">None</option>
-                        </select>
+                <!-- Error messages !-->
+                <div id="error-message" class="row">
+                </div>
 
+
+                <!-- Course and Section selection !-->
+                <div class="row">
+
+                    <!-- Save Buttom !-->
+                    <div class="col-lg-4">
+                        <h4>Save Changes:</h4>
+                        <div id="save-btn" class="col-lg-4 btn btn-success">Save</div>
+                    </div>
+
+
+                    <!-- course selection !-->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="courses"><h4>Select Course:</h4></label>
+                            <select class="form-control" id="courses">
+                                <option value='0' selected="selected">None</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- section selection !-->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="sections"><h4>Select Section:</h4></label>
+                            <select class="form-control" id="sections">
+                                <option value='0' selected="selected">None</option>
+                            </select>
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Classlist Panel !-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-list fa-fw"></i> Class List
-                            <div class="pull-right">
-                                <a data-toggle="collapse" data-target="#classlist-wrapper">
-                                    <i class="fa fa-minus fa-fw"></i>
-                                </a>
-                            </div>
-
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div id="classlist-wrapper" class="panel-collapse collapse in">
-                            <div class="panel-body classlist-info" id="classlist-table-wrapper">
-                                <table id="classlist-table" class="table display hidden" cellpadding="0">
-                                    <thead>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>First</th>
-                                        <th>Last</th>
-                                        <th>Email</th>
-                                        <th>SID</th>
-                                        <th>Option</th>
-                                    </tr>
-                                    </thead>
-                                </table>
+                <!-- Classlist Panel !-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-list fa-fw"></i> Class List
+                                <div class="pull-right">
+                                    <a data-toggle="collapse" data-target="#classlist-wrapper">
+                                        <i class="fa fa-minus fa-fw"></i>
+                                    </a>
+                                </div>
 
                             </div>
-                            <!-- /.panel-body !-->
+                            <!-- /.panel-heading -->
+                            <div id="classlist-wrapper" class="panel-collapse collapse in">
+                                <div class="panel-body classlist-info" id="classlist-table-wrapper">
+                                    <table id="classlist-table" class="table display hidden" cellpadding="0">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>First</th>
+                                                <th>Last</th>
+                                                <th>Email</th>
+                                                <th>SID</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+
+                                </div>
+                                <!-- /.panel-body !-->
+                            </div>
+                            <!-- /.panel-collapse !-->
                         </div>
-                        <!-- /.panel-collapse !-->
                     </div>
                 </div>
-            </div>
 
-            <!-- Participant Panel !-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-list fa-fw"></i>Participant
-                            <div class="pull-right">
-                                <a data-toggle="collapse" data-target="#participant-wrapper">
-                                    <i class="fa fa-minus fa-fw"></i>
-                                </a>
+                <!-- Participant Panel !-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-list fa-fw"></i>Participant
+                                <div class="pull-right">
+                                    <a data-toggle="collapse" data-target="#participant-wrapper">
+                                        <i class="fa fa-minus fa-fw"></i>
+                                    </a>
+                                </div>
+
                             </div>
+                            <!-- /.panel-heading -->
+                            <div id="participant-wrapper" class="panel-collapse collapse in">
+                                <!--<div class="btn btn-info" id="select-all"> Select All</div>-->
+                                <div class="panel-body participant-info" id="participant-table-wrapper">
+                                    <table id="participant-table" class="table display hidden" cellpadding="0">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>First</th>
+                                                <th>Last</th>
+                                                <th>Email</th>
+                                                <th>LMSID</th>
+                                                <th>Option</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
 
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div id="participant-wrapper" class="panel-collapse collapse in">
-                            <!--<div class="btn btn-info" id="select-all"> Select All</div>-->
-                            <div class="panel-body participant-info" id="participant-table-wrapper">
-                                <table id="participant-table" class="table display hidden" cellpadding="0">
-                                    <thead>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>First</th>
-                                        <th>Last</th>
-                                        <th>Email</th>
-                                        <th>LMSID</th>
-                                        <th>Option</th>
-                                    </tr>
-                                    </thead>
-                                </table>
+                                <!-- /.panel-body !-->
                             </div>
-
-                            <!-- /.panel-body !-->
+                            <!-- /.panel-collapse !-->
                         </div>
-                        <!-- /.panel-collapse !-->
                     </div>
                 </div>
+
+
             </div>
-
-
         </div>
-
     </div>
     <!-- /#wrapper -->
 

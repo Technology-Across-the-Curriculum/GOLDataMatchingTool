@@ -121,7 +121,7 @@
                 }
 
                 $('#section-table').dataTable({
-    
+                scrollY: 650,
                 destroy: true,
                 bPaginate: false,
                 stripeClasses: [],

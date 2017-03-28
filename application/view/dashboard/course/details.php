@@ -7,7 +7,6 @@
  * Time: 9:09 AM
  */
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,7 +30,7 @@
 
     <!-- DataTables CSS -->
     <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
-          type="text/css">
+    type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -50,29 +49,29 @@
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <!-- Navigation -->
-    <?php require TEMP . 'dashboard/navigation.php'; ?>
+        <!-- Navigation -->
+        <?php require TEMP . 'dashboard/navigation.php'; ?>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
 
-            <!-- Page Header -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Details: <?php echo $courseInfo->acronym; ?></h1>
+                <!-- Page Header -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Details: <?php echo $courseInfo->acronym; ?></h1>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <!-- List Courses -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <table id="section-table" class="table">
-                    <thead>
-                           <tr>
+                <!-- List Courses -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="section-table" class="table">
+                            <thead>
+                             <tr>
                                 <th>Id</th>
                                 <th>Course Id</th>
                                 <th>Classroom Id</th>
@@ -81,66 +80,67 @@
                                 <th>Alt Term Code</th>
                                 <th>Code</th>
                                 <th>Options</th>
-                           </tr>
-                       </thead>
+                            </tr>
+                        </thead>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /#wrapper -->
+</div>
+<!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
+<!-- jQuery -->
+<script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap admin JavaScript !-->
-    <script src="<?php echo URL; ?>libs/bootstrap-admin/js/sb-admin-2.min.js"></script>
+<!-- Bootstrap admin JavaScript !-->
+<script src="<?php echo URL; ?>libs/bootstrap-admin/js/sb-admin-2.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
 
-    <!-- DataTables Plugin JavaScript -->
-    <script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo URL; ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
+<!-- DataTables Plugin JavaScript -->
+<script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo URL; ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script>
-            var url = '<?php echo URL; ?>';
-            var data = JSON.parse('<?php echo $sectionList; ?>');
-            $(document).ready(function () {
-                for(var d in data){
-                    data[d]['options'] = '<a href="'+ url + 'dashboard/sectionDetail/' + data[d]['id'] + '"class="btn btn-default">Select</a>'
-                                        + '<a href="'+ url + 'dashboard/sectionEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
-                                        + '<a href="'+ url + 'dashboard/sectionDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
+<!-- Custom Theme JavaScript -->
+<script>
+    var url = '<?php echo URL; ?>';
+    var data = JSON.parse('<?php echo $sectionList; ?>');
+    $(document).ready(function () {
+        for(var d in data){
+            data[d]['options'] = '<a href="'+ url + 'dashboard/sectionDetail/' + data[d]['id'] + '"class="btn btn-default">Select</a>'
+            + '<a href="'+ url + 'dashboard/sectionEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
+            + '<a href="'+ url + 'dashboard/sectionDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
             
-                }
+        }
 
-                $('#section-table').dataTable({
-                scrollY: 200,
-                destroy: true,
-                bPaginate: false,
-                stripeClasses: [],
-                data: data,
-                "columns": [
-                        {"data": "id"},
-                        {"data": "course_id"},
-                        {"data": "classroom_id"},
-                        {"data": "crn"},
-                        {"data": "term_code"},
-                        {"data": "alt_term_code"},
-                        {"data": "code"},
-                        {"data": "options"}
-                    ]
-                });
+        $('#section-table').dataTable({
+            scrollY: 200,
+            destroy: true,
+            bPaginate: false,
+            stripeClasses: [],
+            data: data,
+            "columns": [
+            {"data": "id"},
+            {"data": "course_id"},
+            {"data": "classroom_id"},
+            {"data": "crn"},
+            {"data": "term_code"},
+            {"data": "alt_term_code"},
+            {"data": "code"},
+            {"data": "options"}
+            ]
+        });
 
 
 
-            });
-        </script>
-    <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
+    });
+</script>
+<script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
 
 </body>
 

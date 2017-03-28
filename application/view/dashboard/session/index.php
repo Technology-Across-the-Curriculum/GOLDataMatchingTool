@@ -7,7 +7,6 @@
  * Time: 9:09 AM
  */
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,10 +30,13 @@
 
     <!-- DataTables CSS -->
     <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
-          type="text/css">
+    type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS !-->
+    <link href="<?php echo URL; ?>css/master.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,56 +49,37 @@
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <!-- Navigation -->
-    <?php require TEMP . 'dashboard/navigation.php'; ?>
+        <!-- Navigation -->
+        <?php require TEMP . 'dashboard/navigation.php'; ?>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
 
-            <!-- Page Header -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Session</h1>
+                <!-- Page Header -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Session</h1>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <!-- List Courses -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <table id="section-table" class="table">
-                        <thead>
-                        <?php
-                        foreach ($keys as $key)
-                            echo '<th>' . $key . '</th>'
-                        ?>
-                        <th>Options</th>
-                        </thead>
-                        <tbody>
-
-                        <?php
-                        foreach ($sessionList as $session) {
-                            ?>
-                            <tr>
-                                <?php foreach ($session as $key => $value) {
-                                    echo '<td>' . $value . '</td>';
-                                } ?>
-                                <td>
-                                    <a href="<?php echo URL; ?>dashboard/sessionDetail/<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>dashboard/sessionEdit<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>dashboard/sessionDelete<?php echo htmlspecialchars($session->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-danger">Delete</a>
-                                </td>
+                <!-- List Courses -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="session-table" class="table">
+                          <thead>
+                              <tr>
+                                <th>Id</th>
+                                <th>Acronym</th>
+                                <th>CRN</th>
+                                <th>Source Id </th>
+                                <th>Date Created </th>
+                                <th>Options</th>
                             </tr>
-                        <?php } ?>
-
-
-                        </tbody>
+                        </thead>
                     </table>
                 </div>
 
@@ -111,6 +94,9 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
+        <!-- Bootstrap admin JavaScript !-->
+        <script src="<?php echo URL; ?>libs/bootstrap-admin/js/sb-admin-2.min.js"></script>
+
         <!-- Metis Menu Plugin JavaScript -->
         <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
 
@@ -121,13 +107,36 @@
         <!-- Custom Theme JavaScript -->
         <script>
             var url = '<?php echo URL; ?>';
+            var data = JSON.parse('<?php echo $sessionList; ?>');
+            console.log(data);
             $(document).ready(function () {
-                $('#section-table').DataTable();
+                for(var d in data){
+                    data[d]['options'] = '<a href="'+ url + 'dashboard/sessionDetail/' + data[d]['id'] + '"class="btn btn-default">Select</a>'
+                    + '<a href="'+ url + 'dashboard/sessionEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
+                    + '<a href="'+ url + 'dashboard/sessionDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
+                    
+                }
+
+                $('#session-table').dataTable({
+                    scrollY: 650,
+                    destroy: true,
+                    bPaginate: false,
+                    stripeClasses: [],
+                    data: data,
+                    "columns": [
+                    {"data": "id"},
+                    {"data": "acronym"},
+                    {"data": "crn"},
+                    {"data": "source_id"},
+                    {"data": "date_created"},
+                    {"data": "options"}
+                    ]
+                });
+
             });
         </script>
-        <script src="<?php echo URL; ?>libs/bootstrap-admin/css/sb-admin-2.min.js"></script>
         <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
 
-</body>
+    </body>
 
-</html>
+    </html>
