@@ -31,13 +31,7 @@
             <h1>404</h1>
             <p>page not found</p>
         </header>
-        <section class="col-lg-offset-3 col-lg-6">
-            <p></p>
-        </section>
-            <footer class="col-lg-12 text-center">
-                <!-- Default to the left -->
-                <!--<strong></strong> All rights reserved.-->
-            </footer>
+
     </div>
 </div>
 <!-- jQuery 2.1.4 -->

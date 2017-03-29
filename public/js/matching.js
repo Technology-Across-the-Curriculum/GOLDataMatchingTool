@@ -108,6 +108,7 @@ function getSection(id) {
     })
         .done(function (json) {
             var i = 0;
+      
             data = JSON.parse(json);
 
             // applying courses to dropdown

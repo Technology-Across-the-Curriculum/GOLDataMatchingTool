@@ -31,10 +31,13 @@
 
     <!-- DataTables CSS -->
     <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
-          type="text/css">
+    type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS !-->
+    <link href="<?php echo URL; ?>css/master.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,89 +50,89 @@
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <!-- Navigation -->
-    <?php require TEMP . 'dashboard/navigation.php'; ?>
+        <!-- Navigation -->
+        <?php require TEMP . 'dashboard/navigation.php'; ?>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
 
-            <!-- Page Header -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Course</h1>
+                <!-- Page Header -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Course</h1>
+                    </div>
+
+                </div>
+
+                <!-- List Courses -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="course-table" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Acronym</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
                 </div>
 
             </div>
+            <!-- /#wrapper -->
 
-            <!-- List Courses -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <table id="course-table" class="table">
-                        <thead>
-                        <?php
-                        foreach ($keys as $key)
-                            echo '<th>' . $key . '</th>'
-                        ?>
-                        <th>Options</th>
-                        </thead>
-                        <tbody>
+            <!-- jQuery -->
+            <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
 
-                        <?php
-                        foreach ($courselist as $course) {
-                            ?>
-                            <tr>
-                                <?php foreach ($course as $key => $value) {
-                                    echo '<td>' . $value . '</td>';
-                                } ?>
-                                <td>
-                                    <a href="<?php echo URL; ?>dashboard/courseDetail/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-default">Select</a>
-                                    <a href="<?php echo URL; ?>dashboard/courseEdit/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-warning">Edit</a>
-                                    <a href="<?php echo URL; ?>dashboard/courseDelete/<?php echo htmlspecialchars($course->id, ENT_QUOTES, 'UTF-8') ?>"
-                                       class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <!-- Bootstrap admin JavaScript !-->
+            <script src="<?php echo URL; ?>libs/bootstrap-admin/js/sb-admin-2.min.js"></script>
+
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
+
+            <!-- DataTables Plugin JavaScript -->
+            <script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
+            <script src="<?php echo URL; ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
+
+            <!-- Custom Theme JavaScript -->
+            <script>
+                var url = '<?php echo URL; ?>';
+                var data = JSON.parse('<?php echo $courselist; ?>');
+                $(document).ready(function () {
+                    for(var d in data){
+                        data[d]['options'] = '<a href="'+ url + 'dashboard/courseDetail/' + data[d]['id'] + '"class="btn btn-default">Select</a>'
+                        + '<a href="'+ url + 'dashboard/courseEdit/' + data[d]['id'] + '"class="btn btn-warning">Edit</a>'
+                        + '<a href="'+ url + 'dashboard/courseDelete/' + data[d]['id'] + '"class="btn btn-danger">Delete</a>';
+                        
+                    }
+
+                    $('#course-table').dataTable({     
+                        scrollY: 650,           
+                        destroy: true,
+                        bPaginate: false,
+                        stripeClasses: [],
+                        data: data,
+                        "columns": [
+                        {"data": "id"},
+                        {"data": "acronym"},
+                        {"data": "options"}
+                        ]
+                    });
 
 
-                        </tbody>
-                    </table>
-                </div>
 
-            </div>
+                });
+            </script>
+            <!--<script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>!-->
 
-        </div>
-        <!-- /#wrapper -->
+        </body>
 
-        <!-- jQuery -->
-        <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
-
-        <!-- Bootstrap admin JavaScript !-->
-        <script src="<?php echo URL; ?>libs/bootstrap-admin/js/sb-admin-2.min.js"></script>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
-
-        <!-- DataTables Plugin JavaScript -->
-        <script src="<?php echo URL; ?>libs/datatables/media/js/jquery.dataTables.min.js"></script>
-        <script src="<?php echo URL; ?>libs/datatables/media/js/dataTables.bootstrap.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script>
-            var url = '<?php echo URL; ?>';
-            $(document).ready(function () {
-                $('#course-table').DataTable();
-            });
-        </script>
-        <script src="<?php echo URL; ?>libs/dashboard/js/controls.js"></script>
-
-</body>
-
-</html>
+        </html>

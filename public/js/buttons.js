@@ -17,3 +17,7 @@ $(function(){
 function swap(e, icons){
     $(e).toggleClass(icons);
 }
+
+function createBtns(id, text, style){
+	return '<div id="' + id + '" class="' + style + '"> ' + text + ' </div>';
+}

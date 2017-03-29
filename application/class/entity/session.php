@@ -23,8 +23,6 @@ class Session extends Entity
                   s.id,
                   c.acronym,
                   sec.crn,
-                  sec.code,
-                  s.guid,
                   s.source_id,
                   s.date_created
                 FROM session as s

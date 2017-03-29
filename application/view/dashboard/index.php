@@ -7,7 +7,6 @@
  * Time: 9:09 AM
  */
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,11 +22,15 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
 
+    <!-- Bootstrap Admin CSS -->
+    <link href="<?php echo URL; ?>libs/bootstrap-admin/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+
     <!-- MetisMenu CSS -->
     <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
-    <!-- Dashboard CSS -->
-    <link href="<?php echo URL; ?>libs/dashboard/css/dashboard.css" rel="stylesheet" type="text/css">
+    <!-- DataTables CSS -->
+    <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
+    type="text/css">
 
     <!-- Custom Fonts -->
     <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -43,25 +46,25 @@
 
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <!-- Navigation -->
-    <?php require TEMP . 'dashboard/navigation.php'; ?>
+        <!-- Navigation -->
+        <?php require TEMP . 'dashboard/navigation.php'; ?>
 
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
 
-            <!-- Page Header -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                <!-- Page Header -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Dashboard</h1>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
-
     </div>
     <!-- /#wrapper -->
 

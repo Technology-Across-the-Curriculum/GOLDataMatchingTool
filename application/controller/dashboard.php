@@ -23,9 +23,7 @@ class Dashboard extends Controller
     public function course(){
         require APP . 'class/entity/course.php';
         $courseEntity = new Course();
-        $courselist = $courseEntity->getCourse();
-
-        $keys = $this->_getObjectKeys($courselist[0]);
+        $courselist = json_encode($courseEntity->getCourse());
 
         require APP . 'view/dashboard/course/index.php';
 
@@ -37,15 +35,16 @@ class Dashboard extends Controller
 
         # Linking required entitys
         require APP . 'class/entity/course.php';
+        require APP . 'class/entity/section.php';
 
         # Creating course entity object
         $courseEntity = new Course();
+        $sectionEntity = new Section();
+
 
         # Getting current course information
         $courseInfo = $courseEntity->getCourseByID($course_id);
-        $sectionList = $courseEntity->getCourseSection($course_id);
-
-        $keys = $this->_getObjectKeys($sectionList[0]);
+        $sectionList = json_encode($sectionEntity->getSectionByCourseId($course_id));
 
         require APP . 'view/dashboard/course/details.php';
 
@@ -60,10 +59,7 @@ class Dashboard extends Controller
     {
         require APP . 'class/entity/classroom.php';
         $classroomEntity = new Classroom();
-        $classroomList = $classroomEntity->getClassroom();
-
-        $keys = $this->_getObjectKeys($classroomList[0]);
-
+        $classroomList = json_encode($classroomEntity->getClassroom());
         require APP . 'view/dashboard/classroom/index.php';
     }
 
@@ -76,9 +72,9 @@ class Dashboard extends Controller
     {
         require APP . 'class/entity/section.php';
         $sectionEntity = new Section();
-        $sectionList = $sectionEntity->getSectionDetail();
+        $sectionList = json_encode($sectionEntity->getSectionDetail());
 
-        $keys = $this->_getObjectKeys($sectionList[0]);
+        //$keys = $this->_getObjectKeys($sectionList[0]);
 
         require APP . 'view/dashboard/section/index.php';
     }
@@ -97,11 +93,11 @@ class Dashboard extends Controller
         # Getting current course information
         $sectionID = $id;
         $sectionInfo = $section->getSectionDetailByID($id);
-        $sessionList = $section->getSectionSession($id);
-        $sessionKeys = $this->_getObjectKeys($sessionList[0]);
+        $sessionList = json_encode($section->getSectionSession($id));
+        //$sessionKeys = $this->_getObjectKeys($sessionList[0]);
 
-        $studentList = $section->getSectionClasslist($id);
-        $studentKeys = $this->_getObjectKeys($studentList[0]);
+        $studentList = json_encode($section->getSectionClasslist($id));
+        //$studentKeys = $this->_getObjectKeys($studentList[0]);
 
         require APP . 'view/dashboard/section/details.php';
 
@@ -116,9 +112,7 @@ class Dashboard extends Controller
     {
         require APP . 'class/entity/session.php';
         $session = new Session();
-        $sessionList = $session->getSessionNoID();
-
-        $keys = $this->_getObjectKeys($sessionList[0]);
+        $sessionList = json_encode($session->getSessionNoID());
 
         require APP . 'view/dashboard/session/index.php';
     }
