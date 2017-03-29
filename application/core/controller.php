@@ -36,7 +36,7 @@ class Controller
     }
 
     function _getObjectKeys($object){
-        $keys = [];
+        $keys = array();
         foreach ($object as $key => $value) {
             array_push($keys, $key);
         }
