@@ -93,11 +93,11 @@ class Dashboard extends Controller
         # Getting current course information
         $sectionID = $id;
         $sectionInfo = $section->getSectionDetailByID($id);
-        $sessionList = $section->getSectionSession($id);
-        $sessionKeys = $this->_getObjectKeys($sessionList[0]);
+        $sessionList = json_encode($section->getSectionSession($id));
+        //$sessionKeys = $this->_getObjectKeys($sessionList[0]);
 
-        $studentList = $section->getSectionClasslist($id);
-        $studentKeys = $this->_getObjectKeys($studentList[0]);
+        $studentList = json_encode($section->getSectionClasslist($id));
+        //$studentKeys = $this->_getObjectKeys($studentList[0]);
 
         require APP . 'view/dashboard/section/details.php';
 
