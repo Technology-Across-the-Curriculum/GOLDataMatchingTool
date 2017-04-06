@@ -81,6 +81,9 @@
                                 <th>Term Code</th>
                                 <th>Alt Term Code</th>
                                 <th>Code</th>
+                                <th>Matched Participants</th>
+                                <th>Unmatch Participants</th>
+                                <th>Total Participants</th>
                                 <th>Options</th>
                            </tr>
                        </thead>
@@ -134,6 +137,9 @@
                         {"data": "term_code"},
                         {"data": "alt_term_code"},
                         {"data": "code"},
+                        {"data": "unmatched"},
+                        {"data": "matched"},
+                        {"data": "total"},
                         {"data": "options"}
                     ]
                 });
