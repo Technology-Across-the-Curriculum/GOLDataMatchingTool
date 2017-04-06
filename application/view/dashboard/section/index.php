@@ -81,8 +81,8 @@
                                 <th>Term Code</th>
                                 <th>Alt Term Code</th>
                                 <th>Code</th>
+                                <th>Unmatched Participants</th>
                                 <th>Matched Participants</th>
-                                <th>Unmatch Participants</th>
                                 <th>Total Participants</th>
                                 <th>Options</th>
                            </tr>
