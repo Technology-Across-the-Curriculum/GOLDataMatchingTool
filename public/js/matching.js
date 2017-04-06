@@ -6,14 +6,15 @@
  * Time: 1:20 PM
  */
 
-var studentId = null;
-var courseId = null;
-var sectionId = null;
-var sessionId = null;
-var participantMatch = {};
-var participantTable = null;
+ var studentId = null;
+ var courseId = null;
+ var sectionId = null;
+ var sessionId = null;
+ var participantMatch = {};
+ var participantTable = null;
+ var hiddenResults = {}
 
-$(document).ready(function () {
+ $(document).ready(function () {
     // Get course for dropdown
     getCourses();
 
@@ -31,18 +32,6 @@ $(document).ready(function () {
         getClasslistRefactored(sectionId);
         getSession(sectionId);
         getParticipantRefactored(sectionId);
-
-        // When a student is selected higlight the row and save the id
-        // $("div.btn").click(function () {
-        //     pid = $(this).attr('id').split('-');
-        //     if (pid[1] == 'participant') {
-        //         selectParticipant(pid[0]);
-        //     }
-        //     if (pid[1] == 'student') {
-        //         selectStudent(pid[0]);
-        //     }
-        // });
-
 
     });
 
@@ -63,7 +52,7 @@ $(document).ready(function () {
  * Returns:
  *  none
  */
-function getCourses() {
+ function getCourses() {
     var data = null; // hold data to be returned
 
     // Makes an ajax call to backfillapi/fillNode
@@ -73,8 +62,8 @@ function getCourses() {
         async: false,
         url: url + 'matchapi/getCourse'
     })
-        .done(function (json) {
-            data = JSON.parse(json);
+    .done(function (json) {
+        data = JSON.parse(json);
 
             // applying courses to dropdown
             var courseDropdown = $('#courses');            for (var i = 0; i < data.length; i++) {
@@ -82,9 +71,9 @@ function getCourses() {
             }
 
         })
-        .fail(function () {
-            console.log('matchapi/getCourse : failed')
-        });
+    .fail(function () {
+        console.log('matchapi/getCourse : failed')
+    });
 }
 
 /**
@@ -96,7 +85,7 @@ function getCourses() {
  * Returns:
  *  none
  */
-function getSection(id) {
+ function getSection(id) {
     var data = null; // hold data to be returned
 
     // Makes an ajax call to backfillapi/fillNode
@@ -106,10 +95,10 @@ function getSection(id) {
         async: false,
         url: url + 'matchapi/getSection/' + id
     })
-        .done(function (json) {
-            var i = 0;
-      
-            data = JSON.parse(json);
+    .done(function (json) {
+        var i = 0;
+
+        data = JSON.parse(json);
 
             // applying courses to dropdown
             var courseDropdown = $('#sections');
@@ -129,9 +118,9 @@ function getSection(id) {
             }
 
         })
-        .fail(function () {
-            console.log('matchapi/getSection' + id + ' : failed')
-        });
+    .fail(function () {
+        console.log('matchapi/getSection' + id + ' : failed')
+    });
 }
 
 /**
@@ -143,7 +132,7 @@ function getSection(id) {
  * Returns:
  *  none
  */
-function getSession(id) {
+ function getSession(id) {
     var data = null; // hold data to be returned
 
     // Makes an ajax call to backfillapi/fillNode
@@ -153,9 +142,9 @@ function getSession(id) {
         async: false,
         url: url + 'matchapi/getSession/' + id
     })
-        .done(function (json) {
-            var i = 0;
-            data = JSON.parse(json);
+    .done(function (json) {
+        var i = 0;
+        data = JSON.parse(json);
 
             // applying courses to dropdown
             var courseDropdown = $('#session');
@@ -175,9 +164,9 @@ function getSession(id) {
             }
 
         })
-        .fail(function () {
-            console.log('matchapi/getSection' + id + ' : failed')
-        });
+    .fail(function () {
+        console.log('matchapi/getSection' + id + ' : failed')
+    });
 }
 
 /**
@@ -189,7 +178,7 @@ function getSession(id) {
  * Returns:
  *  none
  */
-function getClasslist(id) {
+ function getClasslist(id) {
     var data = null; // hold data to be returned
 
     // Makes an ajax call to backfillapi/fillNode
@@ -199,9 +188,9 @@ function getClasslist(id) {
         async: false,
         url: url + 'matchapi/getClasslist/' + id
     })
-        .done(function (json) {
+    .done(function (json) {
 
-            data = JSON.parse(json);
+        data = JSON.parse(json);
 
             // applying courses to dropdown
             var keys = data['keys'];
@@ -231,15 +220,15 @@ function getClasslist(id) {
                 for (var k in studentList[s]) {
                     tableBodyRow.append(
                         $('<td>', {text: studentList[s][k]})
-                    );
+                        );
                 }
 
                 // adding secetion button to row
                 tableBodyRow.append(
                     $('<td>').append(
                         $('<div>', {text: "Select", id: studentList[s].id + "-student", class: "btn btn-warning"})
-                    )
-                );
+                        )
+                    );
 
                 tableBody.append(tableBodyRow)
             }
@@ -257,9 +246,9 @@ function getClasslist(id) {
                 stripeClasses: []
             });
         })
-        .fail(function () {
-            console.log('matchapi/getSection' + id + ' : failed')
-        });
+    .fail(function () {
+        console.log('matchapi/getSection' + id + ' : failed')
+    });
 }
 
 function getClasslistRefactored(id) {
@@ -273,12 +262,11 @@ function getClasslistRefactored(id) {
         async: false,
         url: url + 'matchapi/getClasslist/' + id
     })
-        .done(function (json) {
-            console.log(json);
-            data = JSON.parse(json);
-            data = modifyClassList(data);
+    .done(function (json) {
+        data = JSON.parse(json);
+        data = modifyClassList(data);
 
-            
+
             // show table
             table.removeClass('hidden');
 
@@ -290,27 +278,27 @@ function getClasslistRefactored(id) {
                 stripeClasses: [],
                 data: data,
                 "columns": [
-                    {"data": "id"},
-                    {"data": "first"},
-                    {"data": "last"},
-                    {"data": "email"},
-                    {"data": "sid"},
-                    {"data": "option"}
+                {"data": "id"},
+                {"data": "first"},
+                {"data": "last"},
+                {"data": "email"},
+                {"data": "sid"},
+                {"data": "option"}
                 ]
-                });
+            });
 
 
                 //
-            $('div[id*="-classlist"]').on("click",function(){
-                var id = this.id.split('-')[0];
-                selectStudent(id);
-            });
+                $('div[id*="-classlist"]').on("click",function(){
+                    var id = this.id.split('-')[0];
+                    selectStudent(id);
+                });
 
-            
-        })
-        .fail(function () {
-            console.log('matchapi/getSection' + id + ' : failed')
-        });
+
+            })
+    .fail(function () {
+        console.log('matchapi/getSection' + id + ' : failed')
+    });
 }
 
 function modifyClassList(classlist){
@@ -330,7 +318,7 @@ function modifyClassList(classlist){
  * Returns:
  *  none
  */
-function getParticipant(section_id, session_id) {
+ function getParticipant(section_id, session_id) {
     var data = null; // hold data to be returned
 
     // Makes an ajax call to backfillapi/fillNode
@@ -340,8 +328,8 @@ function getParticipant(section_id, session_id) {
         async: false,
         url: url + 'matchapi/getParticipant/' + section_id + '/' + session_id
     })
-        .done(function (json) {
-            data = JSON.parse(json);
+    .done(function (json) {
+        data = JSON.parse(json);
             // applying courses to dropdown
             var keys = data['keys'];
             var participantList = data['list'];
@@ -370,7 +358,7 @@ function getParticipant(section_id, session_id) {
                     for (var k in participantList[s]) {
                         tableBodyRow.append(
                             $('<td>', {text: participantList[s][k]})
-                        );
+                            );
                     }
 
                     // adding secetion button to row
@@ -381,8 +369,8 @@ function getParticipant(section_id, session_id) {
                                 id: participantList[s].id + "-participant",
                                 class: "btn btn-warning"
                             })
-                        )
-                    );
+                            )
+                        );
 
                     tableBody.append(tableBodyRow)
                 }
@@ -410,19 +398,19 @@ function getParticipant(section_id, session_id) {
                 var selectedKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
                     $('<span>', {class: "fa fa-square fa-2x key-color key-info"}),
                     $('<span>', {class: "key-text", text: "Selected"})
-                );
+                    );
                 var deletedKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
                     $('<span>', {class: "fa fa-square fa-2x key-color key-error"}),
                     $('<span>', {class: "key-text", text: "Delete Success"})
-                );
+                    );
                 var matchedKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
                     $('<span>', {class: "fa fa-square fa-2x key-color key-success"}),
                     $('<span>', {class: "key-text", text: "Match Success"})
-                );
+                    );
                 var errorKey = $('<div>', {id: 'selected-key', class: "key-container"}).append(
                     $('<span>', {class: "fa fa-square fa-2x key-color key-warning"}),
                     $('<span>', {class: "key-text", text: "error"})
-                );
+                    );
 
                 // append buttons to buttons bar
                 buttons.append(selectAllBtn);
@@ -442,12 +430,12 @@ function getParticipant(section_id, session_id) {
             else {
                 wrapper.append(
                     $('<div>', {class: "alert alert-success", text: "No Unmatched Entries fround"})
-                );
+                    );
             }
         })
-        .fail(function () {
-            console.log('matchapi/getSection' + id + ' : failed')
-        });
+.fail(function () {
+    console.log('matchapi/getSection' + id + ' : failed')
+});
 }
 
 function getParticipantRefactored(section_id, session_id) {
@@ -461,7 +449,7 @@ function getParticipantRefactored(section_id, session_id) {
         async: false,
         url: url + 'matchapi/getParticipant/' + section_id + '/' + session_id
     })
-        .done(function (json) {
+    .done(function (json) {
             // parse json
             data = JSON.parse(json);
 
@@ -480,12 +468,12 @@ function getParticipantRefactored(section_id, session_id) {
                 data: data,
                 "dom": '<"toolbar row">frtip',
                 "columns": [
-                    {"data": "id"},
-                    {"data": "first"},
-                    {"data": "last"},
-                    {"data": "email"},
-                    {"data": "lmsid"},
-                    {"data": "option"}
+                {"data": "id"},
+                {"data": "first"},
+                {"data": "last"},
+                {"data": "email"},
+                {"data": "lmsid"},
+                {"data": "option"}
                 ]
 
 
@@ -515,17 +503,21 @@ function getParticipantRefactored(section_id, session_id) {
                 deleteSelected();
             });
 
+            $('#toggle-btn').click(function(){
+                toggleResults();
+            });
+
 
         })
-        .fail(function () {
-            console.log('matchapi/getSection' + id + ' : failed')
-        });
+    .fail(function () {
+        console.log('matchapi/getSection' + id + ' : failed')
+    });
 }
 /**
  * Add options buttons to each participant object for user in datatables
  * @param {[type]} participantList [description]
  */
-function modifyParticipantList(participantList){
+ function modifyParticipantList(participantList){
     for(var p in participantList){
         participantList[p]['option'] = SelectBtn(participantList[p]['id'], 'participant');
         participantList[p]['DT_RowId'] =  participantList[p]['id'] + '-pl-row';
@@ -539,7 +531,7 @@ function modifyParticipantList(participantList){
  * @param  {[type]} id [description]
  * @return {[type]}    [description]
  */
-function SelectBtn(id, identifier){
+ function SelectBtn(id, identifier){
     return '<div id="' + id + '-' + identifier + '" class="btn btn-warning">Select</div>'
 }
 
@@ -547,14 +539,15 @@ function SelectBtn(id, identifier){
  * Creates action buttons of for participant table
  * @return {[type]} [description]
  */
-function participantToolButtons() {
+ function participantToolButtons() {
     var buttons = $('<div>',{id:"button-toolbar", class:"col-md-6"});
+    var toggleBtn = $('<div>', {id: 'toggle-btn', class: 'btn btn-default', text: 'Toggle Results'});
     var selectAllBtn = $('<div>', {id: 'selectAll-btn', class: "btn btn-primary", text: "Select All"});
     var clearBtn = $('<div>', {id: 'clear-btn', class: 'btn btn-warning', text: 'Clear'});
     var deleteBtn = $('<div>', {id: 'delete-btn', class: 'btn btn-danger', text: 'Delete Selected'});
 
     // append buttons
-    buttons.append(selectAllBtn, clearBtn, deleteBtn);
+    buttons.append(toggleBtn, selectAllBtn, clearBtn, deleteBtn);
     return buttons;
 
 }
@@ -563,30 +556,30 @@ function participantToolButtons() {
  * Creates a legend for participant table
  * @return {[type]} [description]
  */
-function participantToolLegends(){
+ function participantToolLegends(){
     var legend  = $('<div>',{id:"legend-toolbar", class:"col-md-6"});
 
     var selectedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
         $('<span>', {class:"fa fa-square fa-2x key-color key-info"}),
         $('<span>',{class:"key-text", text:"Selected"})
 
-    );
+        );
     var matchedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
         $('<span>', {class:"fa fa-square fa-2x key-color key-success"}),
         $('<span>',{class:"key-text", text:"Match Success"})
 
-    );
+        );
     var deletedKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
         $('<span>', {class:"fa fa-square fa-2x key-color key-error"}),
         $('<span>',{class:"key-text", text:"Delete Success"})
 
-    );
+        );
 
     var errorKey = $('<div>',{id:'selected-key', class:"key-container"}).append(
         $('<span>', {class:"fa fa-square fa-2x key-color key-warning"}),
         $('<span>',{class:"key-text", text:"error"})
 
-    );
+        );
     legend.append(selectedKey, matchedKey, deletedKey, errorKey);
     return legend;
 }
@@ -596,7 +589,7 @@ function participantToolLegends(){
  * Parameters:
  * Returns:
  */
-function selectStudent(id) {
+ function selectStudent(id) {
     if (studentId == null) {
         $("#" + id + "-cl-row").addClass('info');
         studentId = id;
@@ -617,7 +610,7 @@ function selectStudent(id) {
  * Parameters:
  * Returns:
  */
-function selectParticipant(id) {
+ function selectParticipant(id) {
     if (participantMatch[id]) {
         $("#" + id + "-pl-row").removeClass('info');
         delete participantMatch[id];
@@ -633,7 +626,7 @@ function selectParticipant(id) {
  * Parameters:
  * Returns:
  */
-function selectAllParticipants() {
+ function selectAllParticipants() {
     var tbody = $('#participant-table-wrapper table tbody');
     var rows = tbody.children();
     rows.each(function () {
@@ -648,7 +641,7 @@ function selectAllParticipants() {
  * Parameters:
  * Returns:
  */
-function clearAllParticipants() {
+ function clearAllParticipants() {
     var tempParticipantMatch = participantMatch;
     for (var key in tempParticipantMatch) {
         $("#" + key + "-pl-row").removeClass('info');
@@ -661,7 +654,7 @@ function clearAllParticipants() {
  * Parameters:
  * Returns:
  */
-function deleteSelected() {
+ function deleteSelected() {
     var participant = true;
     $('#error-message').empty();
 
@@ -670,7 +663,7 @@ function deleteSelected() {
     if ($.isEmptyObject(participantMatch)) {
         $('#error-message').append(
             $('<div>', {text: "Please select a participant(s) to delete.", class: 'col-lg-12 alert alert-warning '})
-        );
+            );
         participant = false;
     }
 
@@ -682,28 +675,32 @@ function deleteSelected() {
             data: data,
             url: url + 'matchapi/deleteRecord'
         })
-            .done(function (json) {
-                var data = JSON.parse(json);
+        .done(function (json) {
+            var data = JSON.parse(json);
 
                 // remove successfull match from table
                 for (var key in data) {
+                    var row = $('#' + key + '-pl-row');
                     if (data[key] == 's') {
                         $('#' + key + '-pl-row div.btn').remove();
-                        $('#' + key + '-pl-row').removeClass('info');
-                        $('#' + key + '-pl-row').addClass('danger');
+                        row.removeClass('info');
+                        row.addClass('danger');
                     }
                     else {
-                        $('#' + key + '-pl-row').removeClass('info');
-                        $('#' + key + '-pl-row').addClass('warning');
+                        row.removeClass('info');
+                        row.addClass('warning');
                     }
+
+                    // Hids row on success
+                    hidRow(row[0].id);
                 }
 
                 // Resetting participantMatch after success of action.
                 participantMatch = {};
 
             })
-            .fail(function () {
-            })
+        .fail(function () {
+        })
 
     }
     else {
@@ -712,12 +709,14 @@ function deleteSelected() {
 
 }
 
+
+
 /**
  * Description:
  * Parameters:
  * Returns:
  */
-function saveMatches() {
+ function saveMatches() {
     var student = true;
     var participant = true;
 
@@ -727,14 +726,14 @@ function saveMatches() {
     if (studentId == null || studentId == undefined) {
         $('#error-message').append(
             $('<div>', {text: "Please select a student.", class: 'col-lg-12 alert alert-warning '})
-        );
+            );
         student = false;
     }
 
     if ($.isEmptyObject(participantMatch)) {
         $('#error-message').append(
             $('<div>', {text: "Please select a participant.", class: 'col-lg-12 alert alert-warning '})
-        );
+            );
         participant = false;
     }
 
@@ -746,20 +745,24 @@ function saveMatches() {
             data: data,
             url: url + 'matchapi/match'
         })
-            .done(function (json) {
-                var data = JSON.parse(json);
+        .done(function (json) {
+            var data = JSON.parse(json);
 
                 // remove successfull match from table
                 for (var key in data) {
-
+                    var row = $('#' + key + '-pl-row');
                     if (data[key] == 's') {
-                        $('#' + key + '-pl-row').removeClass('info');
-                        $('#' + key + '-pl-row').addClass('success');
+                        row.removeClass('info');
+                        row.addClass('success');
                     }
                     else {
-                        $('#' + key + '-pl-row').removeClass('info');
-                        $('#' + key + '-pl-row').addClass('warning');
+                        row.removeClass('info');
+                        row.addClass('warning');
                     }
+                    
+                    // Hids row on success
+                    hidRow(row[0].id);
+
                 }
 
                 // remove css from selected student
@@ -772,8 +775,8 @@ function saveMatches() {
                 studentId = null;
 
             })
-            .fail(function () {
-            });
+        .fail(function () {
+        });
     }
     else {
         console.log("data not saved");
@@ -781,7 +784,26 @@ function saveMatches() {
 
 }
 
+function hidRow(rowId){
+    if( !(rowId in hiddenResults)){
+        hiddenResults[rowId ] = true;
+        $('#' + rowId).addClass('hidden');
+    }
+    console.log(hiddenResults);
+}
 
+function toggleResults(){
+    for(var row in hiddenResults){
+        if (hiddenResults[row] == true){
+            $('#' + row).removeClass('hidden');
+            hiddenResults[row] = false;
+        }
+        else if(hiddenResults[row] == false){
+            $('#' + row).addClass('hidden');
+            hiddenResults[row] = true;
+        }
+    }
+}
 
 
 
