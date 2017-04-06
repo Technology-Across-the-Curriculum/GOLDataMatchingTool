@@ -19,8 +19,48 @@ class Section extends Entity
 
     public function getSectionDetail()
     {
-        $sql = 'SELECT sec.id, c.acronym, cl.name, sec.crn, sec.term_code, sec.alt_term_code, sec.code FROM section as sec INNER JOIN classroom as cl ON sec.classroom_id = cl.id
-INNER JOIN course as c ON sec.course_id = c.id';
+        /*$sql = 'SELECT sec.id, c.acronym, cl.name, sec.crn, sec.term_code, sec.alt_term_code, sec.code FROM section as sec INNER JOIN classroom as cl ON sec.classroom_id = cl.id
+        INNER JOIN course as c ON sec.course_id = c.id';*/
+        $sql = 'SELECT
+        sec.id,
+        c.acronym,
+        cl.name,
+        sec.crn,
+        sec.term_code,
+        sec.alt_term_code,
+        sec.code,
+        (
+        SELECT count(pl.id)
+        FROM participant_list pl
+        INNER JOIN session ses ON pl.session_id = ses.id
+        WHERE pl.classlist_id = (SELECT id
+        FROM classlist cl
+        WHERE cl.first_name = "Darth" AND cl.last_name = "Vader" AND cl.section_id = sec.id)
+        AND
+        ses.section_id = sec.id
+        ) AS "unmatched",
+        (
+        SELECT count(pl.id)
+        FROM participant_list pl
+        INNER JOIN session ses ON pl.session_id = ses.id
+        WHERE pl.classlist_id <> (SELECT id
+        FROM classlist cl
+        WHERE cl.first_name = "Darth" AND cl.last_name = "Vader" AND cl.section_id = sec.id)
+        AND
+        ses.section_id = sec.id
+        )
+        AS "matched",
+        (
+        SELECT count(pl.id)
+        FROM participant_list pl
+        INNER JOIN session ses ON pl.session_id = ses.id
+        WHERE ses.section_id = sec.id
+        ) AS "total"
+        FROM section AS sec
+        INNER JOIN classroom AS cl ON sec.classroom_id = cl.id
+        INNER JOIN course AS c ON sec.course_id = c.id';
+
+        
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
@@ -29,7 +69,7 @@ INNER JOIN course as c ON sec.course_id = c.id';
     public function getSectionDetailByID($id)
     {
         $sql = 'SELECT sec.id, c.acronym, cl.name, sec.crn, sec.term_code, sec.alt_term_code, sec.code FROM section as sec INNER JOIN classroom as cl ON sec.classroom_id = cl.id
-INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
+        INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
         $query = $this->db->prepare($sql);
         $parameters = array(':id' => $id);
         $query->execute($parameters);
@@ -64,14 +104,14 @@ INNER JOIN course as c ON sec.course_id = c.id WHERE sec.id = :id';
     public function getCensoredClassList($id)
     {
         $sql = "SELECT 
-                  id, 
-                  
-                  first_name as 'first',  
-                  last_name as 'last',
-                  email,
-                  student_id as 'sid'     
-                FROM classlist 
-                WHERE section_id = :id";
+        id, 
+
+        first_name as 'first',  
+        last_name as 'last',
+        email,
+        student_id as 'sid'     
+        FROM classlist 
+        WHERE section_id = :id";
         $query = $this->db->prepare($sql);
         $parameters = array(':id' => $id);
         $query->execute($parameters);
