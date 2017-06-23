@@ -80,7 +80,7 @@ class Dashboard extends Controller
     }
 
     /*
-     * Index page for session details
+     * Index page for section details
      */
     public function sectionDetail($id){
 
@@ -115,6 +115,28 @@ class Dashboard extends Controller
         $sessionList = json_encode($session->getSessionNoID());
 
         require APP . 'view/dashboard/session/index.php';
+    }
+
+    /*
+     * Index page for session details
+     */
+    public function sessionDetail($id){
+
+        # Linking required entitys
+        require APP . 'class/entity/session.php';
+        require APP . 'class/entity/participant.php';
+
+        # Creating course entity object
+        $sessionEntity = new Session();
+        $participantEntity = new Participant();
+
+        # Getting current course information
+        $sessionInfo = $sessionEntity->getSessionInfo($id);
+        $participantList = json_encode($participantEntity->getBySessionId($id));
+
+
+        require APP . 'view/dashboard/session/details.php';
+
     }
 
 
