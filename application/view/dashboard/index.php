@@ -20,20 +20,20 @@
     <title><?php echo APP_NAME; ?></title>
 
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- Bootstrap Admin CSS -->
-    <link href="<?php echo URL; ?>libs/bootstrap-admin/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo URL; ?>css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
 
     <!-- MetisMenu CSS -->
-    <link href="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo URL; ?>bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet" type="text/css">
 
     <!-- DataTables CSS -->
-    <link href="<?php echo URL; ?>libs/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
+    <link href="<?php echo URL; ?>bower_components/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet"
     type="text/css">
 
     <!-- Custom Fonts -->
-    <link href="<?php echo URL; ?>libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo URL; ?>bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,13 +69,13 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="<?php echo URL; ?>libs/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo URL; ?>bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo URL; ?>libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo URL; ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo URL; ?>libs/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="<?php echo URL; ?>bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script>

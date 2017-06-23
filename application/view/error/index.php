@@ -13,7 +13,7 @@
     <!-- Google fonts !-->
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="<?php echo URL; ?>libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -35,8 +35,8 @@
     </div>
 </div>
 <!-- jQuery 2.1.4 -->
-<script src="<?php echo URL; ?>libs/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<?php echo URL; ?>bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="<?php echo URL; ?>libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo URL; ?>bower_components/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

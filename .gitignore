@@ -52,4 +52,5 @@ fabric.properties
 public/libs/
 application/config/
 sftp-config.json
-
+public/bower_components
+.ftpconfig
