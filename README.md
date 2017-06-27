@@ -10,11 +10,11 @@ Gold Data Matching Tool is a web interface that allows an authorize user to manu
 ## Install
 1. `git clone project` to web directory
 2. `cd public` directory
-  - `bower install`
+   - `bower install`
 3. `cd application/config`
-  - `cp default-config.json -> config.json`
-  - Set up database connection information
-  - Add login information  
+   - `cp default-config.json -> config.json`
+   - Set up database connection information
+   - Add login information  
 
     ```php
     /**
