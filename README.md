@@ -4,7 +4,7 @@ Gold Data Matching Tool is a web interface that allows an authorize user to manu
 ## Requirements
 * NodeJS (v6.11.0)
   * Bower
-* Apache (Current
+* Apache (Current)
 * PHP
 
 ## Install
@@ -25,4 +25,4 @@ Gold Data Matching Tool is a web interface that allows an authorize user to manu
     define('SESSION_KEY', 'active');
     define('SESSION_EXCEPTIONS', serialize(array('home','user', 'error')));
     ```
-4. from the project home directory give all files 755 permission
+4. From the project home directory give all files 755 permission
