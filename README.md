@@ -1,13 +1,13 @@
 # GOLDataMatchingTool
 Gold Data Matching Tool is a web interface that allows an authorize user to manually match students form the registrar's office (Grade/Consent) to participants from the Turning Point.
 
-## Requirements
+## System Reqirements
 * NodeJS (v6.11.0)
   * Bower
 * Apache (Current)
 * PHP
 
-## Install
+## Installiation
 1. `git clone project` to web directory
 2. `cd public` directory
    - `bower install`
